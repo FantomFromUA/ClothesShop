@@ -22,7 +22,7 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-    	Product product = new Product("Test2", "Jeans", 228, "XXXL", 132.99, "THE BEST FUCKING YEAH");
+    	Product product = new Product("Test2", "Jeans", 345, "XXXL", 132.99, "THE BEST FUCKING YEAH");
     	
     	productRepository.save(product);
     	
