@@ -36,7 +36,7 @@ public class Order {
 	@Column(name="completed")
 	private boolean isCompleted;
 	
-	@ManyToOne(fetch=FetchType.EAGER,
+	@ManyToOne(fetch=FetchType.LAZY,
 			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
 					    CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
@@ -47,7 +47,9 @@ public class Order {
 			   cascade=CascadeType.ALL)
 	private List<OrderItem> orderItems;
 	
-	public Order() {}
+	public Order() {
+		
+	}
 
 	public int getId() {
 		return id;
@@ -104,6 +106,7 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+	
 
 	@Override
 	public String toString() {
