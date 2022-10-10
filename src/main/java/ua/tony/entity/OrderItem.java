@@ -23,15 +23,21 @@ public class OrderItem {
 	
 	@ManyToOne(fetch=FetchType.EAGER,
 			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.PERSIST, CascadeType.REFRESH})
+					    CascadeType.REFRESH})
 	@JoinColumn(name="order_id")
 	private Order order;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, 
+		    		   CascadeType.REFRESH})
 	@JoinColumn(name="product_id")
 	private Product product;
 	
 	public OrderItem() {}
+
+	public OrderItem(Order order, Product product) {
+		this.order = order;
+		this.product = product;
+	}
 
 	public int getId() {
 		return id;
@@ -44,9 +50,11 @@ public class OrderItem {
 	public Order getOrder() {
 		return order;
 	}
-
+	
 	public void setOrder(Order order) {
 		this.order = order;
+		// Перераховуємо ціну заказу
+		order.setTotalPrice(order.getTotalPrice() + this.product.getPrice());
 	}
 
 	public Product getProduct() {

@@ -41,8 +41,8 @@ public class User {
 	
 	
 	@OneToMany(mappedBy="user",
-			   fetch=FetchType.LAZY,
-			   cascade=CascadeType.ALL)
+			   fetch=FetchType.EAGER,
+			   cascade=CascadeType.REMOVE)
 	private List<Order> orders;
 	
 	public User() {}

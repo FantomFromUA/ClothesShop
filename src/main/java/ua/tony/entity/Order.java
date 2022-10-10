@@ -38,16 +38,18 @@ public class Order {
 	
 	@ManyToOne(fetch=FetchType.EAGER,
 			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.PERSIST, CascadeType.REFRESH})
+					    CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
 	private User user;
 	
 	@OneToMany(mappedBy="order",
-			   fetch=FetchType.LAZY,
+			   fetch=FetchType.EAGER,
 			   cascade=CascadeType.ALL)
 	private List<OrderItem> orderItems;
 	
-	public Order() {}
+	public Order() {
+		
+	}
 
 	public int getId() {
 		return id;
@@ -104,6 +106,7 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
+	
 
 	@Override
 	public String toString() {
