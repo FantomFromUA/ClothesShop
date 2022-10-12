@@ -36,9 +36,8 @@ public class Order {
 	@Column(name="completed")
 	private boolean isCompleted;
 	
-	@ManyToOne(fetch=FetchType.LAZY,
-			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.PERSIST, CascadeType.REFRESH})
+	@ManyToOne(fetch=FetchType.EAGER,
+			   cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
 	private User user;
 	

@@ -45,12 +45,11 @@ public class Runner implements CommandLineRunner {
 //    	
 //    	Order order = new Order();
 //    	order.setUser(user);
-//    	user.getOrders().add(order);
 //    	
-//    	userRepository.save(user);
+//    	orderRepository.save(order);
     	
 //    	Order order = orderRepository.findById(3).get();
-    	orderRepository.deleteById(9);
+    	orderRepository.deleteById(8);
     	
 //    	userRepository.deleteById(3);
     	
