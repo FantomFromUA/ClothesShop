@@ -13,61 +13,58 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="order_items")
+@Table(name = "order_items")
 public class OrderItem {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
-	
-	@ManyToOne(fetch=FetchType.EAGER,
-			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.REFRESH})
-	@JoinColumn(name="order_id")
-	private Order order;
-	
-	@OneToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, 
-		    		   CascadeType.REFRESH})
-	@JoinColumn(name="product_id")
-	private Product product;
-	
-	public OrderItem() {}
 
-	public OrderItem(Order order, Product product) {
-		this.order = order;
-		this.product = product;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
 
-	public int getId() {
-		return id;
-	}
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-	public Order getOrder() {
-		return order;
-	}
-	
-	public void setOrder(Order order) {
-		this.order = order;
-		// Перераховуємо ціну заказу
-		order.setTotalPrice(order.getTotalPrice() + this.product.getPrice());
-	}
+    public OrderItem() {
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public OrderItem(Order order, Product product) {
+	this.order = order;
+	this.product = product;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public int getId() {
+	return id;
+    }
 
-	@Override
-	public String toString() {
-		return "OrderItem [id=" + id + ", order=" + order + ", product=" + product + "]";
-	}
-	
+    public void setId(int id) {
+	this.id = id;
+    }
+
+    public Order getOrder() {
+	return order;
+    }
+
+    public void setOrder(Order order) {
+	this.order = order;
+	order.setTotalPrice(order.getTotalPrice() + this.product.getPrice());
+    }
+
+    public Product getProduct() {
+	return product;
+    }
+
+    public void setProduct(Product product) {
+	this.product = product;
+    }
+
+    @Override
+    public String toString() {
+	return "OrderItem [id=" + id + ", order=" + order + ", product=" + product + "]";
+    }
+
 }

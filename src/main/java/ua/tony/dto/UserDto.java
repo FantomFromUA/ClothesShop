@@ -1,51 +1,36 @@
-package ua.tony.entity;
+package ua.tony.dto;
 
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "users")
-public class User {
+import ua.tony.entity.Order;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class UserDto {
+
     private int id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
     private String surname;
 
-    @Column(name = "login")
     private String login;
 
-    @Column(name = "password")
     private String password;
 
-    @Column(name = "coins")
     private double coins;
 
-    @Column(name = "admin_access")
     private boolean adminAccess;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<Order> orders;
+    private List<OrderDto> ordersDto;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String name, String surname, String login, String password, double coins, boolean adminAccess) {
+    public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess) {
 	this.name = name;
 	this.surname = surname;
 	this.login = login;
@@ -110,12 +95,14 @@ public class User {
 	this.adminAccess = adminAccess;
     }
 
-    public List<Order> getOrders() {
-	return orders;
+
+
+    public List<OrderDto> getOrdersDto() {
+        return ordersDto;
     }
 
-    public void setOrders(List<Order> orders) {
-	this.orders = orders;
+    public void setOrdersDto(List<OrderDto> ordersDto) {
+        this.ordersDto = ordersDto;
     }
 
     @Override

@@ -1,46 +1,29 @@
-package ua.tony.entity;
+package ua.tony.dto;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "products")
-public class Product {
+public class ProductDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
     private String type;
 
-    @Column(name = "code")
     private int code;
 
-    @Column(name = "size")
     private String size;
 
-    @Column(name = "price")
     private double price;
 
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "in_stock")
     private boolean inStock;
 
-    public Product() {
+    public ProductDto() {
     }
 
-    public Product(String name, String type, int code, String size, double price, String description) {
+    public ProductDto(String name, String type, int code, String size, double price, String description) {
 	this.name = name;
 	this.type = type;
 	this.code = code;

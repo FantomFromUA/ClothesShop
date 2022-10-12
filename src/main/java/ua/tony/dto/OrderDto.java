@@ -1,4 +1,4 @@
-package ua.tony.entity;
+package ua.tony.dto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,35 +15,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "orders")
-public class Order {
+import ua.tony.entity.OrderItem;
+import ua.tony.entity.User;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+public class OrderDto {
+
     private int id;
 
-    @Column(name = "total_price")
     private double totalPrice;
 
-    @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @Column(name = "delivery_date")
     private LocalDate deliveryDate;
 
-    @Column(name = "completed")
     private boolean isCompleted;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "user_id")
-    private User user;
+    private UserDto userDto;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<OrderItemDto> orderItemsDto;
 
-    public Order() {
+    public OrderDto() {
 
     }
 
@@ -87,25 +78,26 @@ public class Order {
 	this.isCompleted = isCompleted;
     }
 
-    public User getUser() {
-	return user;
+    public UserDto getUserDto() {
+	return userDto;
     }
 
-    public void setUser(User user) {
-	this.user = user;
+    public void setUserDto(UserDto userDto) {
+	this.userDto = userDto;
     }
 
-    public List<OrderItem> getOrderItems() {
-	return orderItems;
+    public List<OrderItemDto> getOrderItemsDto() {
+	return orderItemsDto;
     }
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-	this.orderItems = orderItems;
+    public void setOrderItemsDto(List<OrderItemDto> orderItemsDto) {
+	this.orderItemsDto = orderItemsDto;
     }
 
     @Override
     public String toString() {
 	return "Order [id=" + id + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
-		+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + ", orderItems=" + orderItems + "]";
+		+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + userDto + ", orderItems=" + orderItemsDto
+		+ "]";
     }
 }
