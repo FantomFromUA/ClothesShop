@@ -36,14 +36,14 @@ public class Order {
 	@Column(name="completed")
 	private boolean isCompleted;
 	
-	@ManyToOne(fetch=FetchType.LAZY,
+	@ManyToOne(fetch=FetchType.EAGER,
 			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.PERSIST, CascadeType.REFRESH})
+					    CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
 	private User user;
 	
 	@OneToMany(mappedBy="order",
-			   fetch=FetchType.LAZY,
+			   fetch=FetchType.EAGER,
 			   cascade=CascadeType.ALL)
 	private List<OrderItem> orderItems;
 	

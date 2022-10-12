@@ -42,9 +42,9 @@ CREATE TABLE `order_items` (
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`order_id`) 
-    REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+    REFERENCES `orders` (`id`) ON DELETE CASCADE,
   FOREIGN KEY (`product_id`) 
-    REFERENCES `products` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    REFERENCES `products` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
