@@ -37,12 +37,13 @@ public class Order {
 	private boolean isCompleted;
 	
 	@ManyToOne(fetch=FetchType.EAGER,
-			   cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
+					    CascadeType.REFRESH})
 	@JoinColumn(name="user_id")
 	private User user;
 	
 	@OneToMany(mappedBy="order",
-			   fetch=FetchType.LAZY,
+			   fetch=FetchType.EAGER,
 			   cascade=CascadeType.ALL)
 	private List<OrderItem> orderItems;
 	
