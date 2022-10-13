@@ -1,5 +1,6 @@
 package ua.tony.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -9,15 +10,16 @@ import ua.tony.entity.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
-	User findByLogin(String login);
 
-	Optional<User> findById(int id);
+    User findByLogin(String login);
 
-	Iterable<User> findAll();
+    Optional<User> findById(int id);
 
-	User save(User user);
+    List<User> findAll();
 
-	void deleteAll();
+    User save(User user);
 
-	void deleteById(int id);
+    void deleteAll();
+
+    void deleteById(int id);
 }

@@ -13,21 +13,22 @@ import ua.tony.entity.OrderItem;
 
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> {
-	OrderItem findByProductId(int productId);
 
-	OrderItem findByOrderId(int orderId);
+    OrderItem findByProductId(int productId);
 
-	Optional<OrderItem> findById(int id);
+    OrderItem findByOrderId(int orderId);
 
-	Iterable<OrderItem> findAll();
+    Optional<OrderItem> findById(int id);
 
-	OrderItem save(OrderItem orderItem);
+    List<OrderItem> findAll();
 
-	void deleteAll();
+    OrderItem save(OrderItem orderItem);
 
-	void deleteById(int id);
+    void deleteAll();
 
-	public @Query(value = "SELECT order_items.id,order_items.product_id,order_items.order_id FROM order_items "
-			+ "WHERE order_items.order_id=:orderId ", nativeQuery = true) List<OrderItem> getOrderItemsThatRelatedToOrder(
-					@Param("orderId") Integer orderId);
+    void deleteById(int id);
+
+    public @Query(value = "SELECT order_items.id,order_items.product_id,order_items.order_id FROM order_items "
+	    + "WHERE order_items.order_id=:orderId ", nativeQuery = true) List<OrderItem> getOrderItemsThatRelatedToOrder(
+		    @Param("orderId") Integer orderId);
 }
