@@ -8,36 +8,37 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="type")
+
+	@Column(name = "type")
 	private String type;
-	
-	@Column(name="code")
+
+	@Column(name = "code")
 	private int code;
-	
-	@Column(name="size")
+
+	@Column(name = "size")
 	private String size;
-	
-	@Column(name="price")
+
+	@Column(name = "price")
 	private double price;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-	
-	@Column(name="in_stock")
+
+	@Column(name = "in_stock")
 	private boolean inStock;
-	
-	public Product() {}
+
+	public Product() {
+	}
 
 	public Product(String name, String type, int code, String size, double price, String description) {
 		this.name = name;
@@ -104,7 +105,7 @@ public class Product {
 		this.description = description;
 	}
 
-	public boolean isInStock() {
+	public boolean getInStock() {
 		return inStock;
 	}
 

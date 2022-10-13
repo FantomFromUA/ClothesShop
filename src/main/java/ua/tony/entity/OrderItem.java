@@ -13,26 +13,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="order_items")
+@Table(name = "order_items")
 public class OrderItem {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	
-	@ManyToOne(fetch=FetchType.EAGER,
-			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.REFRESH})
-	@JoinColumn(name="order_id")
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "order_id")
 	private Order order;
-	
-	@OneToOne(cascade={CascadeType.DETACH, CascadeType.MERGE, 
-		    		   CascadeType.REFRESH})
-	@JoinColumn(name="product_id")
+
+	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "product_id")
 	private Product product;
-	
-	public OrderItem() {}
+
+	public OrderItem() {
+	}
 
 	public OrderItem(Order order, Product product) {
 		this.order = order;
@@ -50,11 +48,10 @@ public class OrderItem {
 	public Order getOrder() {
 		return order;
 	}
-	
+
 	public void setOrder(Order order) {
 		this.order = order;
-		// Перераховуємо ціну заказу
-		order.setTotalPrice(order.getTotalPrice() + this.product.getPrice());
+		// order.setTotalPrice(order.getTotalPrice() + this.product.getPrice());
 	}
 
 	public Product getProduct() {
@@ -69,5 +66,5 @@ public class OrderItem {
 	public String toString() {
 		return "OrderItem [id=" + id + ", order=" + order + ", product=" + product + "]";
 	}
-	
+
 }
