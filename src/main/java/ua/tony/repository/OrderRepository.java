@@ -13,21 +13,22 @@ import ua.tony.entity.Order;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
-	Iterable<Order> findByOrderDate(LocalDate orderDate);
-	
-	Iterable<Order> findByDeliveryDate(LocalDate deliveryDate);
-	
-	Optional<Order> findById(int id);
-	
-	Iterable<Order> findAll();
-	
-	Order save(Order order);
-	
-	void deleteAll();
-	
-	void deleteById(int id);
-	
-	public @Query(value = "SELECT orders.id,orders.total_price,orders.order_date,orders.delivery_date,orders.completed,orders.user_id FROM orders "
-		    + "WHERE orders.user_id=:userId ", nativeQuery = true) 
-	          List<Order> getOrdersThatRelatedToUser(@Param("userId") Integer userId);
+
+    List<Order> findByOrderDate(LocalDate orderDate);
+
+    List<Order> findByDeliveryDate(LocalDate deliveryDate);
+
+    Optional<Order> findById(int id);
+
+    List<Order> findAll();
+
+    Order save(Order order);
+
+    void deleteAll();
+
+    void deleteById(int id);
+
+    public @Query(value = "SELECT orders.id,orders.total_price,orders.order_date,orders.delivery_date,orders.completed,orders.user_id FROM orders "
+	    + "WHERE orders.user_id=:userId ", nativeQuery = true) List<Order> getOrdersThatRelatedToUser(
+		    @Param("userId") Integer userId);
 }

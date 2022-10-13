@@ -7,8 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ua.tony.entity.Order;
-import ua.tony.entity.OrderItem;
+import ua.tony.entity.Product;
 import ua.tony.mapper.OrderItemMapper;
 import ua.tony.mapper.OrderMapper;
 import ua.tony.mapper.ProductMapper;
@@ -113,9 +112,13 @@ public class Runner implements CommandLineRunner {
 	User user1=userMapper.convertToEntity(urerDto);
 	Order order= orderRepository.findById(4).get();
         OrderDto orderDto=orderMapper.convertToDto(order);*/
-	List<Order> orders= orderRepository.getOrdersThatRelatedToUser(3);
-	List<OrderItem> orderItems=orderItemRepository.getOrderItemsThatRelatedToOrder(4);
-	System.out.println(orderItems.get(0).toString());
-        
+	//List<Order> orders= orderRepository.getOrdersThatRelatedToUser(3);
+//	List<OrderItem> orderItems=orderItemRepository.getOrderItemsThatRelatedToOrder(4);
+	/*OrderItem orderItem=orderItemRepository.findById(2).get();
+	OrderItemDto orderItemDto=orderItemMapper.convertToDto(orderItem);
+	OrderItem orderItem1=orderItemMapper.convertToEntity(orderItemDto);*/
+	//System.out.println(orderItems.get(0).toString());
+        List<Product> products=productRepository.findAll();
+        System.out.println(products.size());
     }
 }

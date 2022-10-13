@@ -2,7 +2,6 @@ package ua.tony.dto;
 
 import java.util.List;
 
-
 public class UserDto {
 
     private int id;
@@ -89,14 +88,12 @@ public class UserDto {
 	this.adminAccess = adminAccess;
     }
 
-
-
     public List<OrderDto> getOrdersDto() {
-        return ordersDto;
+	return ordersDto;
     }
 
     public void setOrdersDto(List<OrderDto> ordersDto) {
-        this.ordersDto = ordersDto;
+	this.ordersDto = ordersDto;
     }
 
     @Override

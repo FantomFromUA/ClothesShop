@@ -1,6 +1,5 @@
 package ua.tony.dto;
 
-
 public class OrderItemDto {
 
     private int id;
@@ -31,17 +30,16 @@ public class OrderItemDto {
 
     public void setOrderDto(OrderDto orderDto) {
 	this.orderDto = orderDto;
-	orderDto.setTotalPrice(orderDto.getTotalPrice() + this.productDto.getPrice());
+	// orderDto.setTotalPrice(orderDto.getTotalPrice() +
+	// this.productDto.getPrice());
     }
 
-    
-
     public ProductDto getProductDto() {
-        return productDto;
+	return productDto;
     }
 
     public void setProductDto(ProductDto productDto) {
-        this.productDto = productDto;
+	this.productDto = productDto;
     }
 
     @Override

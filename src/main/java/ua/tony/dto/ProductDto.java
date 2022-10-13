@@ -1,6 +1,5 @@
 package ua.tony.dto;
 
-
 public class ProductDto {
 
     private int id;
