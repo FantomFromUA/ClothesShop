@@ -106,6 +106,6 @@ public class Order {
     @Override
     public String toString() {
 	return "Order [id=" + id + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
-		+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + ", orderItems=" + orderItems + "]";
+		+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + "]";
     }
 }

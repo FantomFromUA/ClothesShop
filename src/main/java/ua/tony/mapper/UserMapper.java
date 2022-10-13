@@ -28,7 +28,6 @@ public class UserMapper {
 	user.setName(userDto.getName());
 	user.setPassword(userDto.getPassword());
 	user.setSurname(userDto.getSurname());
-	user.setOrders(userDto.getOrdersDto().stream().map(x -> orderMapper.convertToEntity(x)).toList());
 
 	return user;
     }
@@ -43,7 +42,6 @@ public class UserMapper {
 	userDto.setName(user.getName());
 	userDto.setPassword(user.getPassword());
 	userDto.setSurname(user.getSurname());
-	userDto.setOrdersDto(user.getOrders().stream().map(x -> orderMapper.convertToDto(x)).toList());
 
 	return userDto;
     }

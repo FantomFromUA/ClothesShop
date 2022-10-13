@@ -1,6 +1,5 @@
 package ua.tony.dto;
 
-import javax.persistence.Column;
 
 public class ProductDto {
 

@@ -32,8 +32,7 @@ public class OrderMapper {
 	order.setOrderDate(orderDto.getOrderDate());
 	order.setTotalPrice(orderDto.getTotalPrice());
 	order.setUser(userMapper.convertToEntity(orderDto.getUserDto()));
-	order.setOrderItems(orderDto.getOrderItemsDto().stream().map(x -> orderItemMapper.convertToEntity(x)).toList());
-	
+
 	return order;
     }
 
