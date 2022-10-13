@@ -13,40 +13,40 @@ import ua.tony.entity.OrderItem;
 @Component
 public class OrderMapper {
 
-    private UserMapper userMapper;
-    private OrderItemMapper orderItemMapper;
+	private UserMapper userMapper;
+	private OrderItemMapper orderItemMapper;
 
-    @Autowired
-    public OrderMapper(@Lazy UserMapper userMapper, @Lazy OrderItemMapper orderItemMapper) {
-	this.userMapper = userMapper;
-	this.orderItemMapper = orderItemMapper;
+	@Autowired
+	public OrderMapper(@Lazy UserMapper userMapper, @Lazy OrderItemMapper orderItemMapper) {
+		this.userMapper = userMapper;
+		this.orderItemMapper = orderItemMapper;
 
-    }
+	}
 
-    public Order convertToEntity(OrderDto orderDto) {
-	
-	Order order = new Order();
-	order.setId(orderDto.getId());
-	order.setCompleted(orderDto.getCompleted());
-	order.setDeliveryDate(orderDto.getDeliveryDate());
-	order.setOrderDate(orderDto.getOrderDate());
-	order.setTotalPrice(orderDto.getTotalPrice());
-	order.setUser(userMapper.convertToEntity(orderDto.getUserDto()));
+	public Order convertToEntity(OrderDto orderDto) {
 
-	return order;
-    }
+		Order order = new Order();
+		order.setId(orderDto.getId());
+		order.setCompleted(orderDto.getCompleted());
+		order.setDeliveryDate(orderDto.getDeliveryDate());
+		order.setOrderDate(orderDto.getOrderDate());
+		order.setTotalPrice(orderDto.getTotalPrice());
+		order.setUser(userMapper.convertToEntity(orderDto.getUserDto()));
 
-    public OrderDto convertToDto(Order order) {
-	
-	OrderDto orderDto = new OrderDto();
-	orderDto.setId(order.getId());
-	orderDto.setCompleted(order.getCompleted());
-	orderDto.setDeliveryDate(order.getDeliveryDate());
-	orderDto.setOrderDate(order.getOrderDate());
-	orderDto.setTotalPrice(order.getTotalPrice());
-	orderDto.setUserDto(userMapper.convertToDto(order.getUser()));
-	
-	return orderDto;
-    }
+		return order;
+	}
+
+	public OrderDto convertToDto(Order order) {
+
+		OrderDto orderDto = new OrderDto();
+		orderDto.setId(order.getId());
+		orderDto.setCompleted(order.getCompleted());
+		orderDto.setDeliveryDate(order.getDeliveryDate());
+		orderDto.setOrderDate(order.getOrderDate());
+		orderDto.setTotalPrice(order.getTotalPrice());
+		orderDto.setUserDto(userMapper.convertToDto(order.getUser()));
+
+		return orderDto;
+	}
 
 }
