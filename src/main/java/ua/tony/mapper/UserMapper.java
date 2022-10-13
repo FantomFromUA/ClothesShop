@@ -10,39 +10,39 @@ import ua.tony.entity.User;
 @Component
 public class UserMapper {
 
-    private OrderMapper orderMapper;
+	private OrderMapper orderMapper;
 
-    @Autowired
-    public UserMapper(@Lazy OrderMapper orderMapper) {
-	this.orderMapper = orderMapper;
+	@Autowired
+	public UserMapper(@Lazy OrderMapper orderMapper) {
+		this.orderMapper = orderMapper;
 
-    }
+	}
 
-    public User convertToEntity(UserDto userDto) {
+	public User convertToEntity(UserDto userDto) {
 
-	User user = new User();
-	user.setId(userDto.getId());
-	user.setAdminAccess(userDto.getAdminAccess());
-	user.setCoins(userDto.getCoins());
-	user.setLogin(userDto.getLogin());
-	user.setName(userDto.getName());
-	user.setPassword(userDto.getPassword());
-	user.setSurname(userDto.getSurname());
+		User user = new User();
+		user.setId(userDto.getId());
+		user.setAdminAccess(userDto.getAdminAccess());
+		user.setCoins(userDto.getCoins());
+		user.setLogin(userDto.getLogin());
+		user.setName(userDto.getName());
+		user.setPassword(userDto.getPassword());
+		user.setSurname(userDto.getSurname());
 
-	return user;
-    }
+		return user;
+	}
 
-    public UserDto convertToDto(User user) {
+	public UserDto convertToDto(User user) {
 
-	UserDto userDto = new UserDto();
-	userDto.setId(user.getId());
-	userDto.setAdminAccess(user.getAdminAccess());
-	userDto.setCoins(user.getCoins());
-	userDto.setLogin(user.getLogin());
-	userDto.setName(user.getName());
-	userDto.setPassword(user.getPassword());
-	userDto.setSurname(user.getSurname());
+		UserDto userDto = new UserDto();
+		userDto.setId(user.getId());
+		userDto.setAdminAccess(user.getAdminAccess());
+		userDto.setCoins(user.getCoins());
+		userDto.setLogin(user.getLogin());
+		userDto.setName(user.getName());
+		userDto.setPassword(user.getPassword());
+		userDto.setSurname(user.getSurname());
 
-	return userDto;
-    }
+		return userDto;
+	}
 }
