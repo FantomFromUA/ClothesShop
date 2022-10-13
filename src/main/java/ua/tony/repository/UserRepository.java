@@ -11,15 +11,15 @@ import ua.tony.entity.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    User findByLogin(String login);
+	User findByLogin(String login);
 
-    Optional<User> findById(int id);
+	Optional<User> findById(int id);
 
-    List<User> findAll();
+	List<User> findAll();
 
-    User save(User user);
+	User save(User user);
 
-    void deleteAll();
+	void deleteAll();
 
-    void deleteById(int id);
+	void deleteById(int id);
 }

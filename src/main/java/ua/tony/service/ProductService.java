@@ -13,48 +13,57 @@ import ua.tony.repository.ProductRepository;
 @Service
 public class ProductService {
 
-    @Autowired
-    ProductMapper productMapper;
-    @Autowired
-    ProductRepository productRepo;
+	@Autowired
+	ProductMapper productMapper;
+	@Autowired
+	ProductRepository productRepo;
 
-    public ProductDto save(ProductDto productDto) {
-	Product product = productMapper.convertToEntity(productDto);
-	return productMapper.convertToDto(productRepo.save(product));
-    }
+	public ProductDto save(ProductDto productDto) {
 
-    public ProductDto update(ProductDto productDto) {
-	Product product = productMapper.convertToEntity(productDto);
-	return productMapper.convertToDto(productRepo.save(product));
-    }
+		Product product = productMapper.convertToEntity(productDto);
+		return productMapper.convertToDto(productRepo.save(product));
+	}
 
-    public ProductDto findById(Integer id) {
+	public ProductDto update(ProductDto productDto) {
 
-	return productMapper.convertToDto(productRepo.findById(id).get());
-    }
+		Product product = productMapper.convertToEntity(productDto);
+		return productMapper.convertToDto(productRepo.save(product));
+	}
 
-    public List<ProductDto> findByType(String type) {
+	public ProductDto findById(Integer id) {
 
-	List<ProductDto> productDtoes = productRepo.findByType(type).stream().map(x -> productMapper.convertToDto(x))
-		.toList();
-	return productDtoes;
-    }
+		return productMapper.convertToDto(productRepo.findById(id).get());
+	}
 
-    public List<ProductDto> findByName(String name) {
+	public List<ProductDto> findByType(String type) {
 
-	List<ProductDto> productDtoes = productRepo.findByName(name).stream().map(x -> productMapper.convertToDto(x))
-		.toList();
-	return productDtoes;
-    }
+		List<ProductDto> productDtoes = productRepo.findByType(type).stream().map(x -> productMapper.convertToDto(x))
+				.toList();
+		return productDtoes;
+	}
 
-    public void deleteAll() {
+	public List<ProductDto> findByName(String name) {
 
-	productRepo.deleteAll();
-    }
+		List<ProductDto> productDtoes = productRepo.findByName(name).stream().map(x -> productMapper.convertToDto(x))
+				.toList();
+		return productDtoes;
+	}
 
-    public void deleteById(Integer id) {
+	public List<ProductDto> findAll() {
 
-	productRepo.deleteById(id);
-    }
+		List<ProductDto> productDtoes = productRepo.findAll().stream().map(x -> productMapper.convertToDto(x))
+				.toList();
+		return productDtoes;
+	}
+
+	public void deleteAll() {
+
+		productRepo.deleteAll();
+	}
+
+	public void deleteById(Integer id) {
+
+		productRepo.deleteById(id);
+	}
 
 }
