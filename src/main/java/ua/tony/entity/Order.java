@@ -19,93 +19,93 @@ import javax.persistence.Table;
 @Table(name = "orders")
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "total_price")
-    private double totalPrice;
+	@Column(name = "total_price")
+	private double totalPrice;
 
-    @Column(name = "order_date")
-    private LocalDate orderDate;
+	@Column(name = "order_date")
+	private LocalDate orderDate;
 
-    @Column(name = "delivery_date")
-    private LocalDate deliveryDate;
+	@Column(name = "delivery_date")
+	private LocalDate deliveryDate;
 
-    @Column(name = "completed")
-    private boolean isCompleted;
+	@Column(name = "completed")
+	private boolean isCompleted;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
-    @JoinColumn(name = "user_id")
-    private User user;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "user_id")
+	private User user;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<OrderItem> orderItems;
 
-    public Order() {
+	public Order() {
 
-    }
+	}
 
-    public int getId() {
-	return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-	this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public double getTotalPrice() {
-	return totalPrice;
-    }
+	public double getTotalPrice() {
+		return totalPrice;
+	}
 
-    public void setTotalPrice(double totalPrice) {
-	this.totalPrice = totalPrice;
-    }
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public LocalDate getOrderDate() {
-	return orderDate;
-    }
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
 
-    public void setOrderDate(LocalDate orderDate) {
-	this.orderDate = orderDate;
-    }
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
 
-    public LocalDate getDeliveryDate() {
-	return deliveryDate;
-    }
+	public LocalDate getDeliveryDate() {
+		return deliveryDate;
+	}
 
-    public void setDeliveryDate(LocalDate deliveryDate) {
-	this.deliveryDate = deliveryDate;
-    }
+	public void setDeliveryDate(LocalDate deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
 
-    public boolean getCompleted() {
-	return isCompleted;
-    }
+	public boolean getCompleted() {
+		return isCompleted;
+	}
 
-    public void setCompleted(boolean isCompleted) {
-	this.isCompleted = isCompleted;
-    }
+	public void setCompleted(boolean isCompleted) {
+		this.isCompleted = isCompleted;
+	}
 
-    public User getUser() {
-	return user;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setUser(User user) {
-	this.user = user;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public List<OrderItem> getOrderItems() {
-	return orderItems;
-    }
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
 
-    public void setOrderItems(List<OrderItem> orderItems) {
-	this.orderItems = orderItems;
-    }
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
 
-    @Override
-    public String toString() {
-	return "Order [id=" + id + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
-		+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + "]";
-    }
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
+				+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + "]";
+	}
 }
