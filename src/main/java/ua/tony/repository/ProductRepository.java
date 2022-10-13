@@ -1,5 +1,6 @@
 package ua.tony.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -9,13 +10,14 @@ import ua.tony.entity.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Integer> {
-	Iterable<Product> findByName(String name);
 
-	Iterable<Product> findByType(String type);
+	List<Product> findByName(String name);
+
+	List<Product> findByType(String type);
 
 	Optional<Product> findById(int id);
 
-	Iterable<Product> findAll();
+	List<Product> findAll();
 
 	Product save(Product product);
 

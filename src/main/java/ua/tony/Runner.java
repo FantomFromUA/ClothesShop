@@ -5,8 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ua.tony.dto.ProductDto;
-import ua.tony.entity.Product;
 import ua.tony.mapper.OrderItemMapper;
 import ua.tony.mapper.OrderMapper;
 import ua.tony.mapper.ProductMapper;
@@ -15,6 +13,10 @@ import ua.tony.repository.OrderItemRepository;
 import ua.tony.repository.OrderRepository;
 import ua.tony.repository.ProductRepository;
 import ua.tony.repository.UserRepository;
+import ua.tony.service.OrderItemService;
+import ua.tony.service.OrderService;
+import ua.tony.service.ProductService;
+import ua.tony.service.UserService;
 
 @SpringBootApplication
 public class Runner implements CommandLineRunner {
@@ -30,14 +32,30 @@ public class Runner implements CommandLineRunner {
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
 	@Autowired
 	private ProductMapper productMapper;
+	
 	@Autowired
 	private UserMapper userMapper;
+	
 	@Autowired
 	private OrderMapper orderMapper;
+	
 	@Autowired
 	private OrderItemMapper orderItemMapper;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private OrderService orderService;
+	
+	@Autowired
+	private OrderItemService orderItemService;
+	
+	@Autowired
+	private ProductService productService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Runner.class, args);
@@ -78,7 +96,7 @@ public class Runner implements CommandLineRunner {
 
 ////		ORDER ITEM CREATION
 //    	
-//    	Product product = productRepository.findById(3).get();
+//    	Product product = productRepository.findById(1).get();
 //		Order order = orderRepository.findById(6).get();
 //	
 //		OrderItem orderItem = new OrderItem(order, product);
@@ -89,36 +107,8 @@ public class Runner implements CommandLineRunner {
 //    	orderItemRepository.deleteById(1);
 
 ////		SOME SHIT
-//    	Order order = orderRepository.findById(6).get();
-//    	System.out.println(order.getOrderItems().size());
-
-//	 Product product=productRepository.findById(1).get();
-//	 
-//	 ProductDto productDto=productMapper.convertToDto(product); Product
-//	 product1=productMapper.convertToEntity(productDto);
-//	 System.out.println(product1.toString());
-//	 
-//	
-//	 Product product = productRepository.findById(1).get(); User
-//	 user=userRepository.findById(3).get(); Order
-//	 order=orderRepository.findById(4).get(); OrderItem orderItem=new OrderItem();
-//	 orderItem.setProduct(product); orderItem.setOrder(order);
-//	 orderItemRepository.save(orderItem);
-//	 
-//	User user = userRepository.findById(3).get();
-//	UserDto urerDto= userMapper.convertToDto(user);
-//	User user1=userMapper.convertToEntity(urerDto);
-//	Order order= orderRepository.findById(4).get();
-//        OrderDto orderDto=orderMapper.convertToDto(order);
-//	List<Order> orders= orderRepository.getOrdersThatRelatedToUser(3);
-//	List<OrderItem> orderItems=orderItemRepository.getOrderItemsThatRelatedToOrder(4);
-//	System.out.println(orderItems.get(0).toString());
-
-//    	Product temp1 = productRepository.findById(2).get();
-//    	ProductDto temp2 = productMapper.convertToDto(temp1);
-//    	temp1 = productMapper.convertToEntity(temp2);
-//    	
-//    	System.out.println("Done");
-
+//		var temp = orderService.getOrdersThatRelatedToUser(7);
+//		System.out.println(temp);
+		
 	}
 }

@@ -13,13 +13,14 @@ import ua.tony.entity.OrderItem;
 
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> {
+
 	OrderItem findByProductId(int productId);
 
 	OrderItem findByOrderId(int orderId);
 
 	Optional<OrderItem> findById(int id);
 
-	Iterable<OrderItem> findAll();
+	List<OrderItem> findAll();
 
 	OrderItem save(OrderItem orderItem);
 

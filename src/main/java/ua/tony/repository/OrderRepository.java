@@ -13,13 +13,14 @@ import ua.tony.entity.Order;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
-	Iterable<Order> findByOrderDate(LocalDate orderDate);
 
-	Iterable<Order> findByDeliveryDate(LocalDate deliveryDate);
+	List<Order> findByOrderDate(LocalDate orderDate);
+
+	List<Order> findByDeliveryDate(LocalDate deliveryDate);
 
 	Optional<Order> findById(int id);
 
-	Iterable<Order> findAll();
+	List<Order> findAll();
 
 	Order save(Order order);
 
