@@ -14,8 +14,9 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("University Application Api")
-                                .version("3.0.0")
+                                .title("Clothes Shop Api")
+                                .version("0.1.0")
+                                .description("The best Clothes Shop ever")
                 );
     }
 
