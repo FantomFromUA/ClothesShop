@@ -14,62 +14,68 @@ import ua.tony.repository.OrderRepository;
 @Service
 public class OrderService {
 
-	@Autowired
-	private OrderMapper orderMapper;
-	@Autowired
-	private OrderRepository orderRepo;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private OrderRepository orderRepo;
 
-	public OrderDto save(OrderDto orderDto) {
+    public OrderDto save(OrderDto orderDto) {
+	Order order = orderMapper.convertToEntity(orderDto);
+	return orderMapper.convertToDto(orderRepo.save(order));
+    }
 
-		Order order = orderMapper.convertToEntity(orderDto);
-		return orderMapper.convertToDto(orderRepo.save(order));
+    public OrderDto update(OrderDto orderDto) {
+
+	Order order = orderRepo.findById(orderDto.getId()).get();
+	if (orderDto.getCompleted()) {
+
+	    for (int i = 0; i < order.getOrderItems().size(); i++) {
+
+		order.getOrderItems().get(i).getProduct().setInStock(false);
+	    }
 	}
+	return orderMapper.convertToDto(orderRepo.save(order));
+    }
 
-	public OrderDto update(OrderDto orderDto) {
+    public OrderDto findById(Integer id) {
 
-		Order order = orderMapper.convertToEntity(orderDto);
-		return orderMapper.convertToDto(orderRepo.save(order));
-	}
+	return orderMapper.convertToDto(orderRepo.findById(id).get());
+    }
 
-	public OrderDto findById(Integer id) {
+    public List<OrderDto> findByOrderDate(LocalDate orderDate) {
 
-		return orderMapper.convertToDto(orderRepo.findById(id).get());
-	}
+	List<OrderDto> orders = orderRepo.findByOrderDate(orderDate).stream().map(x -> orderMapper.convertToDto(x))
+		.toList();
+	return orders;
+    }
 
-	public List<OrderDto> findByOrderDate(LocalDate orderDate) {
+    public List<OrderDto> findByDeliveryDate(LocalDate orderDate) {
 
-		List<OrderDto> orders = orderRepo.findByOrderDate(orderDate).stream().map(x -> orderMapper.convertToDto(x))
-				.toList();
-		return orders;
-	}
+	List<OrderDto> orders = orderRepo.findByDeliveryDate(orderDate).stream().map(x -> orderMapper.convertToDto(x))
+		.toList();
+	return orders;
+    }
 
-	public List<OrderDto> findByDeliveryDate(LocalDate orderDate) {
+    public List<OrderDto> getOrdersThatRelatedToUser(Integer userId) {
 
-		List<OrderDto> orders = orderRepo.findByDeliveryDate(orderDate).stream().map(x -> orderMapper.convertToDto(x))
-				.toList();
-		return orders;
-	}
+	List<OrderDto> orders = orderRepo.getOrdersThatRelatedToUser(userId).stream()
+		.map(x -> orderMapper.convertToDto(x)).toList();
+	return orders;
+    }
 
-	public List<OrderDto> getOrdersThatRelatedToUser(Integer userId) {
+    public List<OrderDto> findAll() {
 
-		List<OrderDto> orders = orderRepo.getOrdersThatRelatedToUser(userId).stream()
-				.map(x -> orderMapper.convertToDto(x)).toList();
-		return orders;
-	}
+	List<OrderDto> orders = orderRepo.findAll().stream().map(x -> orderMapper.convertToDto(x)).toList();
+	return orders;
+    }
 
-	public List<OrderDto> findAll() {
+    public void deleteAll() {
 
-		List<OrderDto> orders = orderRepo.findAll().stream().map(x -> orderMapper.convertToDto(x)).toList();
-		return orders;
-	}
+	orderRepo.deleteAll();
+    }
 
-	public void deleteAll() {
+    public void deleteById(Integer id) {
 
-		orderRepo.deleteAll();
-	}
-
-	public void deleteById(Integer id) {
-
-		orderRepo.deleteById(id);
-	}
+	orderRepo.deleteById(id);
+    }
 }

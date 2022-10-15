@@ -1,72 +1,82 @@
 package ua.tony.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ua.tony.dto.OrderDto;
 import ua.tony.dto.OrderItemDto;
+import ua.tony.entity.Order;
 import ua.tony.entity.OrderItem;
 import ua.tony.mapper.OrderItemMapper;
 import ua.tony.repository.OrderItemRepository;
+import ua.tony.repository.OrderRepository;
 
 @Service
 public class OrderItemService {
 
-	@Autowired
-	private OrderItemMapper orderItemMapper;
-	@Autowired
-	private OrderItemRepository orderItemRepo;
+    @Autowired
+    private OrderItemMapper orderItemMapper;
+    @Autowired
+    private OrderItemRepository orderItemRepo;
+    @Autowired
+    private OrderRepository orderRepo;
 
-	public OrderItemDto save(OrderItemDto orderItemDto) {
+    public OrderItemDto save(OrderItemDto orderItemDto) {
 
-		OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
-		return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
-	}
+	/*
+	 * коли ми сейвимо новий ордер айтем для юзера то нам потрібно в цьому методі
+	 * зробити апдейт ордера
+	 */
 
-	public OrderItemDto update(OrderItemDto orderItemDto) {
+	OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
+	Order order = orderRepo.findById(orderItemDto.getOrderDto().getId()).get();
+	order.setTotalPrice(order.getTotalPrice()+orderItemDto.getProductDto().getPrice());
+	orderRepo.save(order);
+	return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
+    }
 
-		OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
-		return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
-	}
+    public OrderItemDto update(OrderItemDto orderItemDto) {
 
-	public OrderItemDto findById(Integer id) {
+	OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
+	return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
+    }
 
-		return orderItemMapper.convertToDto(orderItemRepo.findById(id).get());
-	}
+    public OrderItemDto findById(Integer id) {
 
-	public OrderItemDto findByProductId(Integer productId) {
+	return orderItemMapper.convertToDto(orderItemRepo.findById(id).get());
+    }
 
-		return orderItemMapper.convertToDto(orderItemRepo.findByProductId(productId));
-	}
+    public OrderItemDto findByProductId(Integer productId) {
 
-	public OrderItemDto findByOrderId(Integer orderId) {
+	return orderItemMapper.convertToDto(orderItemRepo.findByProductId(productId));
+    }
 
-		return orderItemMapper.convertToDto(orderItemRepo.findByOrderId(orderId));
-	}
+    public OrderItemDto findByOrderId(Integer orderId) {
 
-	public List<OrderItemDto> findAll() {
+	return orderItemMapper.convertToDto(orderItemRepo.findByOrderId(orderId));
+    }
 
-		List<OrderItemDto> orderItems = orderItemRepo.findAll().stream().map(x -> orderItemMapper.convertToDto(x))
-				.toList();
-		return orderItems;
-	}
+    public List<OrderItemDto> findAll() {
 
-	public void deleteAll() {
+	List<OrderItemDto> orderItems = orderItemRepo.findAll().stream().map(x -> orderItemMapper.convertToDto(x))
+		.toList();
+	return orderItems;
+    }
 
-		orderItemRepo.deleteAll();
-	}
+    public void deleteAll() {
 
-	public void deleteById(Integer id) {
+	orderItemRepo.deleteAll();
+    }
 
-		orderItemRepo.deleteById(id);
-	}
+    public void deleteById(Integer id) {
 
-	public List<OrderItemDto> getOrderItemsThatRelatedToOrder(Integer orderId) {
-		List<OrderItemDto> orderItems = orderItemRepo.getOrderItemsThatRelatedToOrder(orderId).stream()
-				.map(x -> orderItemMapper.convertToDto(x)).toList();
-		return orderItems;
-	}
+	orderItemRepo.deleteById(id);
+    }
+
+    public List<OrderItemDto> getOrderItemsThatRelatedToOrder(Integer orderId) {
+	List<OrderItemDto> orderItems = orderItemRepo.getOrderItemsThatRelatedToOrder(orderId).stream()
+		.map(x -> orderItemMapper.convertToDto(x)).toList();
+	return orderItems;
+    }
 }
