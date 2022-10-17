@@ -31,7 +31,9 @@ public class OrderMapper {
 		order.setDeliveryDate(orderDto.getDeliveryDate());
 		order.setOrderDate(orderDto.getOrderDate());
 		order.setTotalPrice(orderDto.getTotalPrice());
-		order.setUser(userMapper.convertToEntity(orderDto.getUserDto()));
+		if(orderDto.getUserDto() != null) {
+			order.setUser(userMapper.convertToEntity(orderDto.getUserDto()));
+		}
 
 		return order;
 	}
@@ -44,7 +46,9 @@ public class OrderMapper {
 		orderDto.setDeliveryDate(order.getDeliveryDate());
 		orderDto.setOrderDate(order.getOrderDate());
 		orderDto.setTotalPrice(order.getTotalPrice());
-		orderDto.setUserDto(userMapper.convertToDto(order.getUser()));
+		if(order.getUser() != null) {
+			orderDto.setUserDto(userMapper.convertToDto(order.getUser()));
+		}
 
 		return orderDto;
 	}

@@ -16,7 +16,7 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> 
 
 	OrderItem findByProductId(int productId);
 
-	OrderItem findByOrderId(int orderId);
+	List<OrderItem> findByOrderId(int orderId);
 
 	Optional<OrderItem> findById(int id);
 
