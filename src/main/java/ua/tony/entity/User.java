@@ -13,39 +13,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="surname")
+
+	@Column(name = "surname")
 	private String surname;
-	
-	@Column(name="login")
+
+	@Column(name = "login")
 	private String login;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="coins")
+
+	@Column(name = "coins")
 	private double coins;
-	
-	@Column(name="admin_access")
+
+	@Column(name = "admin_access")
 	private boolean adminAccess;
-	
-	
-	@OneToMany(mappedBy="user",
-			   fetch=FetchType.EAGER,
-			   cascade=CascadeType.REMOVE)
+
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Order> orders;
-	
-	public User() {}
+
+	public User() {
+	}
 
 	public User(String name, String surname, String login, String password, double coins, boolean adminAccess) {
 		this.name = name;
@@ -104,7 +102,7 @@ public class User {
 		this.coins = coins;
 	}
 
-	public boolean isAdminAccess() {
+	public boolean getAdminAccess() {
 		return adminAccess;
 	}
 

@@ -16,39 +16,35 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="orders")
+@Table(name = "orders")
 public class Order {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	
-	@Column(name="total_price")
+
+	@Column(name = "total_price")
 	private double totalPrice;
-	
-	@Column(name="order_date")
+
+	@Column(name = "order_date")
 	private LocalDate orderDate;
-	
-	@Column(name="delivery_date")
+
+	@Column(name = "delivery_date")
 	private LocalDate deliveryDate;
-	
-	@Column(name="completed")
+
+	@Column(name = "completed")
 	private boolean isCompleted;
-	
-	@ManyToOne(fetch=FetchType.EAGER,
-			   cascade={CascadeType.DETACH, CascadeType.MERGE, 
-					    CascadeType.REFRESH})
-	@JoinColumn(name="user_id")
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@JoinColumn(name = "user_id")
 	private User user;
-	
-	@OneToMany(mappedBy="order",
-			   fetch=FetchType.EAGER,
-			   cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
-	
+
 	public Order() {
-		
+
 	}
 
 	public int getId() {
@@ -83,7 +79,7 @@ public class Order {
 		this.deliveryDate = deliveryDate;
 	}
 
-	public boolean isCompleted() {
+	public boolean getCompleted() {
 		return isCompleted;
 	}
 
@@ -106,11 +102,10 @@ public class Order {
 	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", totalPrice=" + totalPrice + ", orderDate=" + orderDate + ", deliveryDate="
-				+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + ", orderItems=" + orderItems + "]";
+				+ deliveryDate + ", isCompleted=" + isCompleted + ", user=" + user + "]";
 	}
 }
