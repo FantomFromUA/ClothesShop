@@ -119,5 +119,7 @@ public class Runner implements CommandLineRunner {
 	  //  Map<UserDto,Double> usersValueOfPurchases=userService.getUsersAndValueOfPurchases();
 		System.out.println(products.size());
 		System.out.println(products22.size());*/
+		
+		System.out.println(productService.findByName("supreme jeans"));
 	}
 }

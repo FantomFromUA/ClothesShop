@@ -51,7 +51,7 @@ public class ProductRestController {
 			}
 			return ResponseEntity.ok(temp);
 		}
-		if (product_name != null && product_type == null && product_id != null)
+		if (product_name != null && product_type == null && product_id == null)
 			return ResponseEntity.ok(productService.findByName(product_name));
 		if (product_name == null && product_type == null && product_id == null)
 			return ResponseEntity.ok(productService.findAll());
@@ -62,6 +62,7 @@ public class ProductRestController {
 	@RequestMapping(value = "ursers/products", method = RequestMethod.GET, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
+	@Operation(summary = "Helps to get all products that user has bought")
 	public ResponseEntity<List<ProductDto>> getProductsThatBoughtUser(
 			@RequestParam(value = "user_id", required = false) Integer userId) {
 		if (userId != null)
@@ -91,6 +92,7 @@ public class ProductRestController {
 
 	@RequestMapping(value = "products", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
+	@Operation(summary = "Helps to create new product")
 	public ResponseEntity<ProductDto> createProduct(@RequestBody @Valid ProductDto productDto) {
 
 		return new ResponseEntity<>(productService.save(productDto), HttpStatus.CREATED);
@@ -98,6 +100,7 @@ public class ProductRestController {
 
 	@RequestMapping(value = "products", method = RequestMethod.PUT, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
+	@Operation(summary = "Helps to update already exists product")
 	public ResponseEntity<ProductDto> updateProduct(@RequestBody @Valid ProductDto productDto) {
 
 		return new ResponseEntity<>(productService.update(productDto), HttpStatus.CREATED);
@@ -108,13 +111,12 @@ public class ProductRestController {
 	@Operation(summary = "1.Helps to delete product by its id " + "2.Helps to delete all products ")
 	public ResponseEntity<HttpStatus> deleteProductByIdOrDeleteAllProductsFromDb(
 			@RequestParam(value = "product_id", required = false) Integer product_id) {
-		if (product_id != null) {
-			productService.deleteById(product_id);
-			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-		} else {
-			productService.deleteAll();
-			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-		}
+		if (product_id == null) {
+	        productService.deleteAll();
+        } else {
+        	productService.deleteById(product_id);
+        }
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 
 }
