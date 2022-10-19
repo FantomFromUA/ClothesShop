@@ -18,10 +18,6 @@ body {
   transition: all 0.3s ease 0s;
 }
 
-a {
-  text-decoration: none;
-}
-
 /*
 @media (prefers-color-scheme: dark) {
   body {
@@ -42,6 +38,10 @@ form {
   position: relative;
 }
 
+a {
+  text-decoration: none;
+}
+
 @media (max-width: 500px) {
   form {
     width: 300px;
@@ -54,7 +54,6 @@ form .con {
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
-
 }
 
 
@@ -74,7 +73,8 @@ header h2 {
 
 @media (max-width: 500px) {
   header h2 {
-    font-size: 34px;
+    margin-top: 20px;
+    font-size: 32px;
   }
 }
 
@@ -128,9 +128,20 @@ input[class="form-input"] {
   transition: 0.2s linear;
 }
 
+input[class="form-input"]:not(:last-child) {
+  margin-bottom: 15px;
+}
+
 input[id="txt-input"] {
   width: 80%;
 }
+
+@media (max-width: 500px) {
+  #pwd {
+    margin-bottom: 0;
+  }
+}
+
 
 input:focus {
   transform: translateX(-2px);
@@ -145,7 +156,6 @@ input::placeholder {
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  margin-top: 2%;
 }
 
 @media (max-width: 500px) {

@@ -5,13 +5,13 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../css/login.css" />
-  <title>Log In</title>
+  <link rel="stylesheet" href="../css/signup.css" />
+  <title>Sign Up</title>
 </head>
 
 <body>
   <div class="overlay">
-    <form method="post" action="">
+    <form method="post">
       <div class="color-theme">
         <button type="button" class="theme"></button>
         <button type="button" class="reset"></button>
@@ -19,34 +19,36 @@
       <div class="con">
         <!--    Опис  -->
         <header class="head-form">
-          <h2>Вхід</h2>
-          <p>Для того, щоб увійти - введіть ваш логін та пароль</p>
+          <h2>Реєстрація</h2>
         </header>
         <!-- <br /> -->
         <div class="field-set">
           <!-- Нікнейм -->
-          <input class="form-input" id="txt-input" type="text" placeholder="Ім’я..." required />
+          <input class="form-input" id="txt-input" type="text" placeholder="Введіть ім’я" required />
+          <input class="form-input" id="txt-input" type="text" placeholder="Прізвище (необов’язково)" />
           <div class="pswd-field">
             <!--   Пароль  -->
-            <input class="form-input" type="password" placeholder="Пароль..." id="pwd" name="password" required />
+            <input class="form-input" type="password" placeholder="Придумайте пароль" id="pwd" name="password"
+              required />
 
             <!--      Кнопка схову/появи пароля  -->
             <i class="fa fa-eye" aria-hidden="true" type="button" id="eye">Показати</i>
           </div>
+          <input class="form-input" id="email" type="email" placeholder="Електронна пошта" required />
 
-          <button class="log-in button" type="submit">Вхід</button>
+
+          <button class="log-in button" type="submit">Зареєструватися</button>
         </div>
 
         <!--   Забули пароль / зареєструватися -->
         <div class="other">
-          <a href="" class="button submits frgt-pass">Забули пароль?</a>
-          <a href="../html/signup.html" class="button submits sign-up">Зареєструватися </a>
+          <a href="../html/login.html" class="button submits sign-up">Я вже зареєстрований</a>
         </div>
 
       </div>
     </form>
   </div>
-  <script src="../js/login.js"></script>
+  <script src="../js/signup.js"></script>
   <script src="../js/theme.js"></script>
 </body>
 
