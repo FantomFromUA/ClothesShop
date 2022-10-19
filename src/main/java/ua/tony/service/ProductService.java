@@ -51,9 +51,29 @@ public class ProductService {
 
 	public List<ProductDto> findAll() {
 
-		List<ProductDto> productDtoes = productRepo.findAll().stream().map(x -> productMapper.convertToDto(x))
-				.toList();
+		List<ProductDto> productDtoes = productRepo.findAll().stream().map(x -> productMapper.convertToDto(x)).toList();
 		return productDtoes;
+	}
+
+	public List<ProductDto> getProductsThatBoughtUser(Integer userId) {
+
+		List<ProductDto> products = productRepo.getProductsThatBoughtUser(userId).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
+	}
+
+	public List<ProductDto> getProductsOrderedByPriceByGrowthByType(String type) {
+
+		List<ProductDto> products = productRepo.getSortedListByPriceByGrowthByType(type).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
+	}
+
+	public List<ProductDto> getProductsOrderedByPriceByDeclineByType(String type) {
+
+		List<ProductDto> products = productRepo.getSortedListByPriceByDeclineByType(type).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
 	}
 
 	public void deleteAll() {

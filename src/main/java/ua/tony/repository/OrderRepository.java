@@ -32,3 +32,4 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 			+ "WHERE orders.user_id=:userId ", nativeQuery = true) List<Order> getOrdersThatRelatedToUser(
 					@Param("userId") Integer userId);
 }
+		

@@ -1,10 +1,15 @@
 package ua.tony;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import ua.tony.dto.ProductDto;
+import ua.tony.dto.UserDto;
 import ua.tony.mapper.OrderItemMapper;
 import ua.tony.mapper.OrderMapper;
 import ua.tony.mapper.ProductMapper;
@@ -109,6 +114,12 @@ public class Runner implements CommandLineRunner {
 ////		SOME SHIT
 //		var temp = orderService.getOrdersThatRelatedToUser(7);
 //		System.out.println(temp);
+	/*	List<ProductDto> products=productService.getProductsOrderedByPriceByGrowthByType("hoodie");
+		List<ProductDto> products22=productService.getProductsOrderedByPriceByDeclineByType("hoodie");
+	  //  Map<UserDto,Double> usersValueOfPurchases=userService.getUsersAndValueOfPurchases();
+		System.out.println(products.size());
+		System.out.println(products22.size());*/
 		
+		orderItemService.deleteById(1);
 	}
 }
