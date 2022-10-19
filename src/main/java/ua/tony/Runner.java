@@ -120,6 +120,6 @@ public class Runner implements CommandLineRunner {
 		System.out.println(products.size());
 		System.out.println(products22.size());*/
 		
-		orderItemService.deleteById(1);
+		//orderItemService.deleteById(1);
 	}
 }

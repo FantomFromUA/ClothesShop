@@ -13,25 +13,40 @@
 }
 
 body {
-  background-image: linear-gradient(to top, #414141 0%, #0c0105 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  font-family: "Vibur", cursive;
-  font-family: "Abel", sans-serif;
-
+  background-color: #fff;
+  font-family: Nunito;
+  transition: all 0.3s ease 0s;
 }
 
+a {
+  text-decoration: none;
+}
 
-
+/*
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #333;
+  }
+}
+*/
 form {
   width: 450px;
-  min-height: 500px;
+  min-height: 400px;
   height: auto;
-  border-radius: 15px;
-  margin: 2% auto;
-  box-shadow: 0 2px 10px hsla(20, 3%, 100%, 0.31);
-  padding: 2%;
-  background-color: #aaaabe;
+  border-radius: 25px;
+  margin: 45px auto;
+  /*box-shadow: 0 2px 10px hsla(20, 3%, 100%, 0.31);*/
+  box-shadow: rgba(255, 255, 255, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  padding: 40px;
+  border: 1px solid rgba(34, 34, 34, 0.157);
+  position: relative;
+}
+
+@media (max-width: 500px) {
+  form {
+    width: 300px;
+    padding: 20px;
+  }
 }
 
 form .con {
@@ -39,19 +54,28 @@ form .con {
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 0 auto;
+
 }
 
 
 header {
-  margin: 2% auto 5% auto;
+  margin: 2% auto 10% auto;
   text-align: center;
 }
 
 header h2 {
   font-size: 250%;
-  font-family: "WorkSans", serif;
+  font-family: "WorkSans";
   color: #3e403f;
-  margin-bottom: 0.35em;
+  margin-bottom: 0.3em;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+
+@media (max-width: 500px) {
+  header h2 {
+    font-size: 34px;
+  }
 }
 
 header p {
@@ -67,57 +91,81 @@ header p {
 
 
 #eye {
+  margin-left: 2px;
   background: #fff;
   color: #333;
-
-  margin: 17px 0 0 0;
-  padding: 7px 5px 7px 0px;
+  padding: 8px;
   border-radius: 10px;
-  float: right;
-  position: relative;
-  right: 13%;
-  top: -0.2%;
   z-index: 5;
-
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.0);
   cursor: pointer;
+  transition: border-color 0.3s ease 0s;
 }
 
+#eye:hover {
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 500px) {
+  #eye {
+    margin: 7px 0;
+  }
+}
 
 input[class="form-input"] {
   width: 240px;
   height: 50px;
-
-  margin-top: 2%;
   padding: 15px;
 
   font-size: 16px;
-  font-family: "Abel", sans-serif;
   color: #5e6472;
 
   outline: none;
-  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.3);
 
   border-radius: 10px;
   transition: 0.2s linear;
 }
 
 input[id="txt-input"] {
-  width: 300px;
+  width: 80%;
 }
 
 input:focus {
   transform: translateX(-2px);
 }
 
-button {
+input::placeholder {
+  font-family: Nunito;
+}
+
+.pswd-field {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2%;
+}
+
+@media (max-width: 500px) {
+  .pswd-field {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.button {
   display: inline-block;
   color: #252537;
 
-  width: 350px;
+  font-family: Nunito;
+
+  width: 100%;
   height: 50px;
 
   padding: 0 20px;
-  background: #fff;
+  background-color: rgba(28, 188, 188, 0.737);
   border-radius: 10px;
 
   outline: none;
@@ -127,15 +175,23 @@ button {
   text-align: center;
   transition: all 0.2s linear;
 
-  margin: 7% auto;
+  margin: 5% auto;
   letter-spacing: 0.05em;
 }
 
-.submits {
-  width: 48%;
-  display: inline-block;
-  float: left;
-  margin-left: 2%;
+.field-set {
+  width: 100%;
+}
+
+.log-in {
+  color: rgb(0, 0, 0);
+  font-size: 22px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+}
+
+.log-in:hover {
+  transform: translateY(2px);
 }
 
 
@@ -148,15 +204,38 @@ button {
   background: transparent;
 }
 
-/* buttons hover */
+/*
+
 button:hover {
   transform: translatey(3px);
   box-shadow: none;
 }
 
-/* buttons hover Animation */
 button:hover {
   animation: ani9 0.4s ease-in-out infinite alternate;
+}
+*/
+
+
+
+.other {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submits {
+  /*
+  width: 48%;
+  display: inline-block;
+  float: left;
+  margin-left: 2%;
+  */
+  width: 100%;
+}
+
+.submits:hover {
+  text-decoration: underline;
 }
 
 @keyframes ani9 {
@@ -167,4 +246,96 @@ button:hover {
   100% {
     transform: translateY(5px);
   }
+}
+
+html.dark body {
+  background-color: #333;
+}
+
+html.dark header h2 {
+  color: rgba(255, 255, 255, 0.834);
+}
+
+html.dark header p {
+  color: #fff;
+}
+
+html.dark .button {
+  color: #fff;
+}
+
+html.dark input[class="form-input"] {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+html.dark #eye {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+html.dark .log-in {
+  background-color: rgba(28, 188, 188, 0.913);
+  color: #000;
+}
+
+html.dark form {
+  background-color: rgba(49, 48, 48, 0.749);
+  box-shadow: rgb(255 255 255 / 50%) 0px 8px 37px -10px, rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+}
+
+html.light body {
+  background-color: #fff;
+}
+
+html.dark .theme {
+  background: url('../images/icons/sun.svg') 0 0 / 100% no-repeat;
+}
+
+html.light .theme {
+  background: url('../images/icons/moon.svg') 0 0 / 100% no-repeat;
+}
+
+.color-theme {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+}
+
+.theme {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+}
+
+@media (max-width: 500px) {
+  .theme {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.reset {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.reset:active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reset::before {
+  content: "x";
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  font-size: 7px;
+  border-radius: 50%;
+  line-height: 10px;
+  color: #fff;
+  text-align: center;
+  background-color: rgb(163, 58, 58);
 }

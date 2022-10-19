@@ -24,11 +24,11 @@
         <!-- <br /> -->
         <div class="field-set">
           <!-- Нікнейм -->
-          <input class="form-input" id="txt-input" type="text" placeholder="Введіть ім’я" required />
-          <input class="form-input" id="txt-input" type="text" placeholder="Прізвище (необов’язково)" />
+          <input class="form-input" id="txt-input-name" type="text" placeholder="Введіть ім’я" required />
+          <input class="form-input" id="txt-input-surname" type="text" placeholder="Прізвище (необов’язково)" />
           <div class="pswd-field">
             <!--   Пароль  -->
-            <input class="form-input" type="password" placeholder="Придумайте пароль" id="pwd" name="password"
+            <input class="form-input" type="password" placeholder="Придумайте пароль" id="pass" name="password"
               required />
 
             <!--      Кнопка схову/появи пароля  -->
@@ -37,7 +37,7 @@
           <input class="form-input" id="email" type="email" placeholder="Електронна пошта" required />
 
 
-          <button class="log-in button" type="submit">Зареєструватися</button>
+          <button class="log-in button" type="submit" onclick="sign_up()">Зареєструватися</button>
         </div>
 
         <!--   Забули пароль / зареєструватися -->
