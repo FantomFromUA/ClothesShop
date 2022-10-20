@@ -57,7 +57,7 @@ function sign_up(){
     pass =  document.getElementById("pass").value;
     login =  document.getElementById("email").value;
     
-    let xhr = new XMLHttpRequest();
+    /*let xhr = new XMLHttpRequest();
 	xhr.open("POST", "http://localhost:8082/users");
 	
 	xhr.setRequestHeader("Accept", "application/json");
@@ -74,7 +74,7 @@ function sign_up(){
 			  "adminAccess": false
 			}`;
 	
-	xhr.send(data);
+	xhr.send(data);*/
     
-    //push(nam, surname, login ,pass)
+    push(nam, surname, login ,pass)
 }
