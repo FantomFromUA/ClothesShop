@@ -11,8 +11,8 @@
 
 <body>
   <div class="overlay">
-    <form method="post">
-      <div class="color-theme">
+    <form action="/login">  
+    <div class="color-theme">
         <button type="button" class="theme"></button>
         <button type="button" class="reset"></button>
       </div>
@@ -28,16 +28,16 @@
           <input class="form-input" id="txt-input-surname" type="text" placeholder="Прізвище (необов’язково)" />
           <div class="pswd-field">
             <!--   Пароль  -->
-            <input class="form-input" type="password" placeholder="Придумайте пароль" id="pass" name="password"
+            <input class="form-input" id="password" type="password" placeholder="Придумайте пароль" name="password"
               required />
 
             <!--      Кнопка схову/появи пароля  -->
-            <i class="fa fa-eye" aria-hidden="true" type="button" id="eye">Показати</i>
+            <i class="fa fa-eye" aria-hidden="true" id="eye">Показати</i>
           </div>
-          <input class="form-input" id="email" type="email" placeholder="Електронна пошта" required />
+          <input class="form-input" id="login" type="email" placeholder="Електронна пошта" required />
 
 
-          <button class="log-in button" type="submit" onclick="sign_up()">Зареєструватися</button>
+          <button id="sign-up-button" class="log-in button">Зареєструватися</button>
         </div>
 
         <!--   Забули пароль / зареєструватися -->
@@ -48,7 +48,7 @@
       </div>
     </form>
   </div>
-  <script src="../js/signup.js"></script>
+  <script src="../js/sign-up.js"></script>
   <script src="../js/theme.js"></script>
 </body>
 

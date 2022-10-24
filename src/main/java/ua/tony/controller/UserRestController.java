@@ -67,13 +67,12 @@ public class UserRestController {
 			user.add(userService.findByLogin(user_login));
 			return ResponseEntity.ok(user);
 		}
+		if (user_id == null && user_login == null && purchases == null)
+			return ResponseEntity.ok(userService.findAll());
 		if (user_id == null && user_login == null && purchases.equals("pur")) {
 
 			return ResponseEntity.ok(userService.getUsersAndValueOfPurchases());
 		}
-
-		if (user_id == null && user_login == null && purchases == null)
-			return ResponseEntity.ok(userService.findAll());
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}

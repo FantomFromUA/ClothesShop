@@ -11,4 +11,9 @@ public class TestController {
 	public String showSignUp() {	
 		return "signup";
 	}
+	
+	@GetMapping(value="/login")
+	public String showLoginUp() {	
+		return "login";
+	}
 }
