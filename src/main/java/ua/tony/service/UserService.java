@@ -17,65 +17,65 @@ import ua.tony.repository.UserRepository;
 @Service
 public class UserService {
 
-    @Autowired
-    UserMapper userMapper;
-    @Autowired
-    UserRepository userRepo;
-    @Autowired
-    OrderRepository orderRepo;
+	@Autowired
+	UserMapper userMapper;
+	@Autowired
+	UserRepository userRepo;
+	@Autowired
+	OrderRepository orderRepo;
 
-    public UserDto save(UserDto userDto) {
+	public UserDto save(UserDto userDto) {
 
-	User user = userMapper.convertToEntity(userDto);
-	return userMapper.convertToDto(userRepo.save(user));
-    }
-
-    public UserDto update(UserDto userDto) {
-
-	User user = userMapper.convertToEntity(userDto);
-	return userMapper.convertToDto(userRepo.save(user));
-    }
-
-    public UserDto findById(Integer id) {
-
-	return userMapper.convertToDto(userRepo.findById(id).get());
-    }
-
-    public UserDto findByLogin(String login) {
-
-	return userMapper.convertToDto(userRepo.findByLogin(login));
-    }
-
-    public List<UserDto> findAll() {
-
-	List<UserDto> users = userRepo.findAll().stream().map(x -> userMapper.convertToDto(x)).toList();
-	return users;
-    }
-
-    public Double getPriceOfAllProductsThatUserBought(Integer userId) {
-
-	List<Order> orders=orderRepo.getOrdersThatRelatedToUser(userId);
-	Double TotalPrice =orders.stream().mapToDouble(x->x.getTotalPrice()).average().orElse(0);
-	return TotalPrice;
-    }
-    
-    public Map<UserDto,Double> getUsersAndValueOfPurchases(){
-	
-	List<UserDto> users= findAll();
-	Map<UserDto,Double> usersValueOfPurchases=new LinkedHashMap<>();
-	for(int i=0;i<users.size();i++) {
-	usersValueOfPurchases.put(users.get(i),getPriceOfAllProductsThatUserBought(users.get(i).getId()));
+		User user = userMapper.convertToEntity(userDto);
+		return userMapper.convertToDto(userRepo.save(user));
 	}
-	return usersValueOfPurchases;
-    }
-    
-    public void deleteAll() {
 
-	userRepo.deleteAll();
-    }
+	public UserDto update(UserDto userDto) {
 
-    public void deleteById(Integer id) {
+		User user = userMapper.convertToEntity(userDto);
+		return userMapper.convertToDto(userRepo.save(user));
+	}
 
-	userRepo.deleteById(id);
-    }
+	public UserDto findById(Integer id) {
+
+		return userMapper.convertToDto(userRepo.findById(id).get());
+	}
+
+	public UserDto findByLogin(String login) {
+
+		return userMapper.convertToDto(userRepo.findByLogin(login));
+	}
+
+	public List<UserDto> findAll() {
+
+		List<UserDto> users = userRepo.findAll().stream().map(x -> userMapper.convertToDto(x)).toList();
+		return users;
+	}
+
+	public Double getPriceOfAllProductsThatUserBought(Integer userId) {
+
+		List<Order> orders = orderRepo.getOrdersThatRelatedToUser(userId);
+		Double TotalPrice = orders.stream().mapToDouble(x -> x.getTotalPrice()).average().orElse(0);
+		return TotalPrice;
+	}
+
+	public Map<UserDto, Double> getUsersAndValueOfPurchases() {
+
+		List<UserDto> users = findAll();
+		Map<UserDto, Double> usersValueOfPurchases = new LinkedHashMap<>();
+		for (int i = 0; i < users.size(); i++) {
+			usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsThatUserBought(users.get(i).getId()));
+		}
+		return usersValueOfPurchases;
+	}
+
+	public void deleteAll() {
+
+		userRepo.deleteAll();
+	}
+
+	public void deleteById(Integer id) {
+
+		userRepo.deleteById(id);
+	}
 }

@@ -6,12 +6,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../css/login.css" />
-  <title>Log-in</title>
+  <title>Log In</title>
 </head>
 
 <body>
   <div class="overlay">
-    <form>
+    <form id="main-form">
+      <div class="color-theme">
+        <button type="button" class="theme"></button>
+        <button type="button" class="reset"></button>
+      </div>
       <div class="con">
         <!--    Опис  -->
         <header class="head-form">
@@ -21,29 +25,29 @@
         <!-- <br /> -->
         <div class="field-set">
           <!-- Нікнейм -->
-          <input class="form-input" id="txt-input" type="text" placeholder="Введіть ваше ім'я" required />
-          <!--   Пароль  -->
-          <input class="form-input" type="password" placeholder="Введіть ваш пароль" id="pwd" name="password"
-            required />
+          <input class="form-input" id="txt-input-login" type="text" placeholder="Ім’я..." required />
+          <div class="pswd-field">
+            <!--   Пароль  -->
+            <input class="form-input" id="password" type="password" placeholder="Пароль..." name="password" required />
 
-          <!--      Кнопка схову/появи пароля  -->
-          <span>
+            <!--      Кнопка схову/появи пароля  -->
             <i class="fa fa-eye" aria-hidden="true" type="button" id="eye">Показати</i>
-          </span>
+          </div>
 
-          <button class="log-in">Вхід</button>
+          <button class="log-in button" id="login-button" type="submit">Вхід</button>
         </div>
 
         <!--   Забули пароль / зареєструватися -->
         <div class="other">
-          <button class="btn submits frgt-pass">Забули пароль?</button>
-          <button class="btn submits sign-up">Зареєструватися </button>
+          <a href="" class="button submits frgt-pass">Забули пароль?</a>
+          <a href="../html/signup.html" class="button submits sign-up">Зареєструватися </a>
         </div>
 
       </div>
     </form>
   </div>
   <script src="../js/login.js"></script>
+  <script src="../js/theme.js"></script>
 </body>
 
 </html>
