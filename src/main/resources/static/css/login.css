@@ -287,11 +287,11 @@ html.light body {
 }
 
 html.dark .theme {
-  background: url('../images/icons/sun.svg') 0 0 / 100% no-repeat;
+  background: url('../icons/sun.svg') 0 0 / 100% no-repeat;
 }
 
 html.light .theme {
-  background: url('../images/icons/moon.svg') 0 0 / 100% no-repeat;
+  background: url('../icons/moon.svg') 0 0 / 100% no-repeat;
 }
 
 .color-theme {

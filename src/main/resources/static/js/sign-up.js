@@ -72,5 +72,5 @@ document.getElementById('sign-up-button').addEventListener('click', async () => 
 	
 	console.log(user);
 })
-//window.addEventListener('DOMContentLoaded', getAllUsers);
+window.addEventListener('DOMContentLoaded', getAllUsers);
 

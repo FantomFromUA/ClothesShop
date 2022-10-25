@@ -11,7 +11,7 @@
 
 <body>
   <div class="overlay">
-    <form method="post" action="">
+    <form id="main-form">
       <div class="color-theme">
         <button type="button" class="theme"></button>
         <button type="button" class="reset"></button>
@@ -25,16 +25,16 @@
         <!-- <br /> -->
         <div class="field-set">
           <!-- Нікнейм -->
-          <input class="form-input" id="txt-input" type="text" placeholder="Ім’я..." required />
+          <input class="form-input" id="txt-input-login" type="text" placeholder="Ім’я..." required />
           <div class="pswd-field">
             <!--   Пароль  -->
-            <input class="form-input" type="password" placeholder="Пароль..." id="pwd" name="password" required />
+            <input class="form-input" id="password" type="password" placeholder="Пароль..." name="password" required />
 
             <!--      Кнопка схову/появи пароля  -->
             <i class="fa fa-eye" aria-hidden="true" type="button" id="eye">Показати</i>
           </div>
 
-          <button class="log-in button" type="submit">Вхід</button>
+          <button class="log-in button" id="login-button" type="submit">Вхід</button>
         </div>
 
         <!--   Забули пароль / зареєструватися -->
