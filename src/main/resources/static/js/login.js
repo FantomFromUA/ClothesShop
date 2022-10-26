@@ -1,4 +1,4 @@
-function show() {
+	function show() {
   var p = document.getElementById("password");
   p.setAttribute("type", "text");
 }
@@ -39,4 +39,6 @@ document.getElementById('login-button').addEventListener('click', async () => {
 	const user = await res.json();
 	
 	console.log(user);
+	
+	
 })

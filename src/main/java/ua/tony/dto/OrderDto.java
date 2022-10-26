@@ -17,7 +17,6 @@ public class OrderDto {
 
 	private UserDto userDto;
 
-	private List<OrderItemDto> orderItemsDto;
 
 	public OrderDto() {
 
@@ -71,13 +70,6 @@ public class OrderDto {
 		this.userDto = userDto;
 	}
 
-	public List<OrderItemDto> getOrderItemsDto() {
-		return orderItemsDto;
-	}
-
-	public void setOrderItemsDto(List<OrderItemDto> orderItemsDto) {
-		this.orderItemsDto = orderItemsDto;
-	}
 
 	@Override
 	public String toString() {

@@ -16,4 +16,5 @@ public class TestController {
 	public String showLoginUp() {	
 		return "login";
 	}
+	
 }
