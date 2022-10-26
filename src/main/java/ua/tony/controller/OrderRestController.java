@@ -28,20 +28,20 @@ public class OrderRestController {
 
 	@Autowired
 	private OrderService orderService;
-	
-	@RequestMapping(value="orders", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+
+	@RequestMapping(value = "orders", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	@Operation(summary = "1. Helps to get order by its id " + "2. Helps to get all orders")
 	public ResponseEntity<List<OrderDto>> getOrderById(
-			@RequestParam(value = "order_id", required = false) Integer order_id){
-		if(order_id == null) {
+			@RequestParam(value = "order_id", required = false) Integer order_id) {
+		if (order_id == null) {
 			return ResponseEntity.ok(orderService.findAll());
 		}
-		
+
 		List<OrderDto> orders = new ArrayList<>();
 		orders.add(orderService.findById(order_id));
 		return ResponseEntity.ok(orders);
-		
+
 	}
 
 	@RequestMapping(value = "orders", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
@@ -59,18 +59,18 @@ public class OrderRestController {
 
 		return new ResponseEntity<>(orderService.update(orderDto), HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(value = "orders", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
 	@Operation(summary = "1. Helps to delete order by uts id" + "2. Helps to delete all the orders")
 	public ResponseEntity<HttpStatus> deleteOrderByIdOrAll(
-			@RequestParam(value = "order_id", required = false) Integer order_id){
-		if(order_id == null) {
+			@RequestParam(value = "order_id", required = false) Integer order_id) {
+		if (order_id == null) {
 			orderService.deleteAll();
 		} else {
 			orderService.deleteById(order_id);
 		}
 		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-		
+
 	}
 }

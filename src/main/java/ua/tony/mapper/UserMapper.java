@@ -1,7 +1,5 @@
 package ua.tony.mapper;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import ua.tony.dto.UserDto;
@@ -9,14 +7,6 @@ import ua.tony.entity.User;
 
 @Component
 public class UserMapper {
-
-	private OrderMapper orderMapper;
-
-	@Autowired
-	public UserMapper(@Lazy OrderMapper orderMapper) {
-		this.orderMapper = orderMapper;
-
-	}
 
 	public User convertToEntity(UserDto userDto) {
 

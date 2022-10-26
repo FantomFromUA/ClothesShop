@@ -56,42 +56,41 @@ public class UserRestController {
 			@RequestParam(value = "user_login", required = false) String user_login,
 			@RequestParam(value = "purchases", required = false) String purchases,
 			@RequestParam(value = "password", required = false) String password) {
-		//Find by ID
+		// Find by ID
 		if (user_id != null && user_login == null && purchases == null && password == null) {
 
 			List<UserDto> user = new ArrayList<>();
 			user.add(userService.findById(user_id));
 			return ResponseEntity.ok(user);
 		}
-		
-		//Find by login and password
-		if(user_id == null && user_login != null && password != null && purchases == null) {
+
+		// Find by login and password
+		if (user_id == null && user_login != null && password != null && purchases == null) {
 			UserDto user = userService.findByLogin(user_login);
 			System.out.println(user);
-			if(user.getPassword().equals(password)) {
+			if (user.getPassword().equals(password)) {
 				return ResponseEntity.ok(user);
 			}
-			
+
 			return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 		}
-		
-		//Find by login
+
+		// Find by login
 		if (user_id == null && user_login != null && purchases == null && password == null) {
 
 			List<UserDto> user = new ArrayList<>();
 			user.add(userService.findByLogin(user_login));
 			return ResponseEntity.ok(user);
 		}
-		//Find All
+		// Find All
 		if (user_id == null && user_login == null && purchases == null && password == null)
 			return ResponseEntity.ok(userService.findAll());
-		
-		//Find user purchases
+
+		// Find user purchases
 		if (user_id == null && user_login == null && purchases.equals("pur") && password == null) {
 
 			return ResponseEntity.ok(userService.getUsersAndValueOfPurchases());
-		}
-		else
+		} else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 

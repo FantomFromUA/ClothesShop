@@ -43,8 +43,7 @@ public class ProductRestController {
 			product.add(productService.findById(product_id));
 			return ResponseEntity.ok(product);
 		}
-		if (product_name == null && product_type != null && product_id == null)
-		{
+		if (product_name == null && product_type != null && product_id == null) {
 			var temp = productService.findByType(product_type);
 			if (temp.size() == 0) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -82,10 +81,10 @@ public class ProductRestController {
 		if (sortOption == null)
 			return ResponseEntity.ok(productService.findByType("hoodie"));
 		if (sortOption.equals("asc")) {
-			return ResponseEntity.ok(productService.getProductsOrderedByPriceByGrowthByType("hoodie"));
+			return ResponseEntity.ok(productService.getListOfProductsSortedByPrice("hoodie"));
 		}
 		if (sortOption.equals("desc"))
-			return ResponseEntity.ok(productService.getProductsOrderedByPriceByDeclineByType("hoodie"));
+			return ResponseEntity.ok(productService.getListOfProductsSortedByPriceDESC("hoodie"));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
@@ -112,11 +111,11 @@ public class ProductRestController {
 	public ResponseEntity<HttpStatus> deleteProductByIdOrDeleteAllProductsFromDb(
 			@RequestParam(value = "product_id", required = false) Integer product_id) {
 		if (product_id == null) {
-	        productService.deleteAll();
-        } else {
-        	productService.deleteById(product_id);
-        }
-        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+			productService.deleteAll();
+		} else {
+			productService.deleteById(product_id);
+		}
+		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
 	}
 
 }

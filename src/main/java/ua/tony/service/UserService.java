@@ -24,34 +24,87 @@ public class UserService {
 	@Autowired
 	OrderRepository orderRepo;
 
+	/**
+	 * Метод, який зберігає користувача в БД
+	 * 
+	 * @param userDto - користувач
+	 * @return користувач
+	 */
 	public UserDto save(UserDto userDto) {
 
 		User user = userMapper.convertToEntity(userDto);
 		return userMapper.convertToDto(userRepo.save(user));
 	}
 
+	/**
+	 * Метод, який оновлює інформацію про користувача в БД
+	 * 
+	 * @param userDto - користувач
+	 * @return користувач
+	 */
 	public UserDto update(UserDto userDto) {
 
 		User user = userMapper.convertToEntity(userDto);
 		return userMapper.convertToDto(userRepo.save(user));
 	}
 
+	/**
+	 * Метод, який знаходить та повертає користувача за заданим id
+	 * 
+	 * @param id - id користувача
+	 * @return користувач
+	 */
 	public UserDto findById(Integer id) {
 
 		return userMapper.convertToDto(userRepo.findById(id).get());
 	}
 
+	/**
+	 * Метод, який знаходить та повертає користувача за заданим логіном
+	 * 
+	 * @param login - login користувача
+	 * @return користувач
+	 */
 	public UserDto findByLogin(String login) {
 
 		return userMapper.convertToDto(userRepo.findByLogin(login));
 	}
 
+	/**
+	 * Метод, який повертає всі дані з таблиці users в БД
+	 * 
+	 * @return список користувачів
+	 */
 	public List<UserDto> findAll() {
 
 		List<UserDto> users = userRepo.findAll().stream().map(x -> userMapper.convertToDto(x)).toList();
 		return users;
 	}
 
+	/**
+	 * Метод, який видаляє всі дані з таблиці users в БД
+	 */
+	public void deleteAll() {
+
+		userRepo.deleteAll();
+	}
+
+	/**
+	 * Метод, який видаляє користувача за заданим id
+	 * 
+	 * @param id - id користувача
+	 */
+	public void deleteById(Integer id) {
+
+		userRepo.deleteById(id);
+	}
+
+	/**
+	 * Метод, який рахує загальну ціну всіх покупок заданого користувача
+	 * 
+	 * @param userId - id користувача
+	 * @return загальна ціна покупок
+	 */
 	public Double getPriceOfAllProductsThatUserBought(Integer userId) {
 
 		List<Order> orders = orderRepo.getOrdersThatRelatedToUser(userId);
@@ -59,6 +112,12 @@ public class UserService {
 		return TotalPrice;
 	}
 
+	/**
+	 * Метод, який повертає список користувачів та загальну ціну покупок цих
+	 * користувачів
+	 * 
+	 * @return список користувачів та загальну ціну покупок цих користувачів
+	 */
 	public Map<UserDto, Double> getUsersAndValueOfPurchases() {
 
 		List<UserDto> users = findAll();
@@ -67,15 +126,5 @@ public class UserService {
 			usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsThatUserBought(users.get(i).getId()));
 		}
 		return usersValueOfPurchases;
-	}
-
-	public void deleteAll() {
-
-		userRepo.deleteAll();
-	}
-
-	public void deleteById(Integer id) {
-
-		userRepo.deleteById(id);
 	}
 }
