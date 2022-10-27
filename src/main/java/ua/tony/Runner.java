@@ -37,28 +37,28 @@ public class Runner implements CommandLineRunner {
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
-	
+
 	@Autowired
 	private ProductMapper productMapper;
-	
+
 	@Autowired
 	private UserMapper userMapper;
-	
+
 	@Autowired
 	private OrderMapper orderMapper;
-	
+
 	@Autowired
 	private OrderItemMapper orderItemMapper;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Autowired
 	private OrderItemService orderItemService;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -114,12 +114,16 @@ public class Runner implements CommandLineRunner {
 ////		SOME SHIT
 //		var temp = orderService.getOrdersThatRelatedToUser(7);
 //		System.out.println(temp);
-	/*	List<ProductDto> products=productService.getProductsOrderedByPriceByGrowthByType("hoodie");
-		List<ProductDto> products22=productService.getProductsOrderedByPriceByDeclineByType("hoodie");
-	  //  Map<UserDto,Double> usersValueOfPurchases=userService.getUsersAndValueOfPurchases();
-		System.out.println(products.size());
-		System.out.println(products22.size());*/
-		
-		//orderItemService.deleteById(1);
+		/*
+		 * List<ProductDto>
+		 * products=productService.getProductsOrderedByPriceByGrowthByType("hoodie");
+		 * List<ProductDto>
+		 * products22=productService.getProductsOrderedByPriceByDeclineByType("hoodie");
+		 * // Map<UserDto,Double>
+		 * usersValueOfPurchases=userService.getUsersAndValueOfPurchases();
+		 * System.out.println(products.size()); System.out.println(products22.size());
+		 */
+
+		// orderItemService.deleteById(1);
 	}
 }

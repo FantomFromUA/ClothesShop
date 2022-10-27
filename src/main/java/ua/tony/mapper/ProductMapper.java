@@ -1,8 +1,6 @@
 package ua.tony.mapper;
 
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import ua.tony.entity.Product;
 import ua.tony.dto.ProductDto;
 

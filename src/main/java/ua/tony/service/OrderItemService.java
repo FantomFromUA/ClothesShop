@@ -1,6 +1,5 @@
 package ua.tony.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,64 +15,115 @@ import ua.tony.repository.OrderRepository;
 @Service
 public class OrderItemService {
 
-    @Autowired
-    private OrderItemMapper orderItemMapper;
-    @Autowired
-    private OrderItemRepository orderItemRepo;
-    @Autowired
-    private OrderRepository orderRepo;
+	@Autowired
+	private OrderItemMapper orderItemMapper;
+	@Autowired
+	private OrderItemRepository orderItemRepo;
+	@Autowired
+	private OrderRepository orderRepo;
 
-    public OrderItemDto save(OrderItemDto orderItemDto) {
+	/**
+	 * Метод, який зберігає елемент заказу в БД
+	 * 
+	 * @param orderItemDto - елемент заказу
+	 * @return елемент заказу
+	 */
+	public OrderItemDto save(OrderItemDto orderItemDto) {
 
-	OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
-	Order order = orderRepo.findById(orderItemDto.getOrderDto().getId()).get();
-	order.setTotalPrice(order.getTotalPrice() + orderItemDto.getProductDto().getPrice());
-	orderRepo.save(order);
-	return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
-    }
+		OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
+		Order order = orderRepo.findById(orderItemDto.getOrderDto().getId()).get();
+		order.setTotalPrice(order.getTotalPrice() + orderItemDto.getProductDto().getPrice());
+		orderRepo.save(order);
+		return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
+	}
 
-    public OrderItemDto update(OrderItemDto orderItemDto) {
+	/**
+	 * 
+	 * Метод, який оновлює інформацію про елемент заказу в БД
+	 * 
+	 * @param orderItemDto - елемент заказу
+	 * @return елемент заказу
+	 */
+	public OrderItemDto update(OrderItemDto orderItemDto) {
 
-	OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
-	return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
-    }
+		OrderItem orderItem = orderItemMapper.convertToEntity(orderItemDto);
+		return orderItemMapper.convertToDto(orderItemRepo.save(orderItem));
+	}
 
-    public OrderItemDto findById(Integer id) {
+	/**
+	 * Метод, який знаходить та повертає елемент заказу за заданим id
+	 * 
+	 * @param id - id елемента заказу
+	 * @return елемент заказу
+	 */
+	public OrderItemDto findById(Integer id) {
 
-	return orderItemMapper.convertToDto(orderItemRepo.findById(id).get());
-    }
+		return orderItemMapper.convertToDto(orderItemRepo.findById(id).get());
+	}
 
-    public OrderItemDto findByProductId(Integer productId) {
+	/**
+	 * Метод, який знаходить та повертає елемент заказу за заданим id продукта
+	 * 
+	 * @param productId - id продукта
+	 * @return елемент заказу
+	 */
+	public OrderItemDto findByProductId(Integer productId) {
 
-	return orderItemMapper.convertToDto(orderItemRepo.findByProductId(productId));
-    }
+		return orderItemMapper.convertToDto(orderItemRepo.findByProductId(productId));
+	}
 
-    public List<OrderItemDto> findByOrderId(Integer orderId) {
-	return orderItemRepo.findByOrderId(orderId).stream().map(orderItem -> orderItemMapper.convertToDto(orderItem))
-		.toList();
+	/**
+	 * Метод, який знаходить список елементів заказу за заданим id заказу
+	 * 
+	 * @param orderId - id заказу
+	 * @return список елементів заказу
+	 */
+	public List<OrderItemDto> findByOrderId(Integer orderId) {
+		return orderItemRepo.findByOrderId(orderId).stream().map(orderItem -> orderItemMapper.convertToDto(orderItem))
+				.toList();
 
-    }
+	}
 
-    public List<OrderItemDto> findAll() {
+	/**
+	 * Метод, який повертає всі дані з таблиці order_items в БД
+	 * 
+	 * @return список елементів заказу
+	 */
+	public List<OrderItemDto> findAll() {
 
-	List<OrderItemDto> orderItems = orderItemRepo.findAll().stream().map(x -> orderItemMapper.convertToDto(x))
-		.toList();
-	return orderItems;
-    }
+		List<OrderItemDto> orderItems = orderItemRepo.findAll().stream().map(x -> orderItemMapper.convertToDto(x))
+				.toList();
+		return orderItems;
+	}
 
-    public void deleteAll() {
+	/**
+	 * Метод, який видаляє всі дані з таблиці order_items в БД
+	 */
+	public void deleteAll() {
 
-	orderItemRepo.deleteAll();
-    }
+		orderItemRepo.deleteAll();
+	}
 
-    public void deleteById(Integer id) {
+	/**
+	 * Метод, який видаляє елемент заказу за заданим id
+	 * 
+	 * @param id - id елемента заказу
+	 */
+	public void deleteById(Integer id) {
 
-	orderItemRepo.deleteById(id);
-    }
+		orderItemRepo.deleteById(id);
+	}
 
-    public List<OrderItemDto> getOrderItemsThatRelatedToOrder(Integer orderId) {
-	List<OrderItemDto> orderItems = orderItemRepo.getOrderItemsThatRelatedToOrder(orderId).stream()
-		.map(x -> orderItemMapper.convertToDto(x)).toList();
-	return orderItems;
-    }
+	/**
+	 * Метод, який повертає список елементів заказу, який відноситься до заданого
+	 * заказу
+	 * 
+	 * @param orderId - id заказу
+	 * @return список елементів заказу
+	 */
+	public List<OrderItemDto> getOrderItemsThatRelatedToOrder(Integer orderId) {
+		List<OrderItemDto> orderItems = orderItemRepo.getOrderItemsThatRelatedToOrder(orderId).stream()
+				.map(x -> orderItemMapper.convertToDto(x)).toList();
+		return orderItems;
+	}
 }

@@ -13,77 +13,134 @@ import ua.tony.repository.ProductRepository;
 @Service
 public class ProductService {
 
-    @Autowired
-    ProductMapper productMapper;
-    @Autowired
-    ProductRepository productRepo;
+	@Autowired
+	ProductMapper productMapper;
+	@Autowired
+	ProductRepository productRepo;
 
-    public ProductDto save(ProductDto productDto) {
+	/**
+	 * Метод, який зберігає продукт в БД
+	 * 
+	 * @param productDto - продукт
+	 * @return продукт
+	 */
+	public ProductDto save(ProductDto productDto) {
 
-	Product product = productMapper.convertToEntity(productDto);
-	return productMapper.convertToDto(productRepo.save(product));
-    }
+		Product product = productMapper.convertToEntity(productDto);
+		return productMapper.convertToDto(productRepo.save(product));
+	}
 
-    public ProductDto update(ProductDto productDto) {
+	/**
+	 * Метод, який оновлює інформацію про продукт в БД
+	 * 
+	 * @param productDto - продукт
+	 * @return продукт
+	 */
+	public ProductDto update(ProductDto productDto) {
 
-	Product product = productMapper.convertToEntity(productDto);
-	return productMapper.convertToDto(productRepo.save(product));
-    }
+		Product product = productMapper.convertToEntity(productDto);
+		return productMapper.convertToDto(productRepo.save(product));
+	}
 
-    public ProductDto findById(Integer id) {
+	/**
+	 * Метод, який знаходить та повертає продукт за заданим id
+	 * 
+	 * @param id - id продукта
+	 * @return продукт
+	 */
+	public ProductDto findById(Integer id) {
 
-	return productMapper.convertToDto(productRepo.findById(id).get());
-    }
+		return productMapper.convertToDto(productRepo.findById(id).get());
+	}
 
-    public List<ProductDto> findByType(String type) {
+	/**
+	 * Метод, який знаходить та повертає список продуктів за заданим типом
+	 * 
+	 * @param type - тип продукта
+	 * @return список продуктів
+	 */
+	public List<ProductDto> findByType(String type) {
 
-	List<ProductDto> productDtoes = productRepo.findByType(type).stream().map(x -> productMapper.convertToDto(x))
-		.toList();
-	return productDtoes;
-    }
+		List<ProductDto> productDtoes = productRepo.findByType(type).stream().map(x -> productMapper.convertToDto(x))
+				.toList();
+		return productDtoes;
+	}
 
-    public List<ProductDto> findByName(String name) {
+	/**
+	 * Метод, який знаходить та повертає список продуктів за заданою назвою
+	 * 
+	 * @param type - назва продукта
+	 * @return список продуктів
+	 */
+	public List<ProductDto> findByName(String name) {
 
-	List<ProductDto> productDtoes = productRepo.findByName(name).stream().map(x -> productMapper.convertToDto(x))
-		.toList();
-	return productDtoes;
-    }
+		List<ProductDto> productDtoes = productRepo.findByName(name).stream().map(x -> productMapper.convertToDto(x))
+				.toList();
+		return productDtoes;
+	}
 
-    public List<ProductDto> findAll() {
+	/**
+	 * Метод, який повертає всі дані з таблиці products в БД
+	 * 
+	 * @return список продуктів
+	 */
+	public List<ProductDto> findAll() {
 
-	List<ProductDto> productDtoes = productRepo.findAll().stream().map(x -> productMapper.convertToDto(x)).toList();
-	return productDtoes;
-    }
+		List<ProductDto> productDtoes = productRepo.findAll().stream().map(x -> productMapper.convertToDto(x)).toList();
+		return productDtoes;
+	}
 
-    public List<ProductDto> getProductsThatBoughtUser(Integer userId) {
+	/**
+	 * Метод, який видаляє всі дані з таблиці products в БД
+	 */
+	public void deleteAll() {
 
-	List<ProductDto> products = productRepo.getProductsThatBoughtUser(userId).stream()
-		.map(x -> productMapper.convertToDto(x)).toList();
-	return products;
-    }
+		productRepo.deleteAll();
+	}
 
-    public List<ProductDto> getProductsOrderedByPriceByGrowthByType(String type) {
+	/**
+	 * Метод, який видаляє продукт за заданим id
+	 * 
+	 * @param id - id продукта
+	 */
+	public void deleteById(Integer id) {
 
-	List<ProductDto> products = productRepo.getSortedListByPriceByGrowthByType(type).stream()
-		.map(x -> productMapper.convertToDto(x)).toList();
-	return products;
-    }
+		productRepo.deleteById(id);
+	}
 
-    public List<ProductDto> getProductsOrderedByPriceByDeclineByType(String type) {
+	// ???
+	public List<ProductDto> getProductsThatBoughtUser(Integer userId) {
 
-	List<ProductDto> products = productRepo.getSortedListByPriceByDeclineByType(type).stream()
-		.map(x -> productMapper.convertToDto(x)).toList();
-	return products;
-    }
+		List<ProductDto> products = productRepo.getProductsThatBoughtUser(userId).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
+	}
 
-    public void deleteAll() {
+	/**
+	 * Метод, який повертає список продуктів заданого типу посортованих за
+	 * зростанням ціни
+	 * 
+	 * @param type - тип продукта
+	 * @return список продуктів
+	 */
+	public List<ProductDto> getListOfProductsSortedByPrice(String type) {
 
-	productRepo.deleteAll();
-    }
+		List<ProductDto> products = productRepo.getListOfProductsSortedByPrice(type).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
+	}
 
-    public void deleteById(Integer id) {
+	/**
+	 * Метод, який повертає список продуктів заданого типу посортованих за спаданням
+	 * ціни
+	 * 
+	 * @param type - тип продукта
+	 * @return список продуктів
+	 */
+	public List<ProductDto> getListOfProductsSortedByPriceDESC(String type) {
 
-	productRepo.deleteById(id);
-    }
-
+		List<ProductDto> products = productRepo.getListOfProductsSortedByPriceDESC(type).stream()
+				.map(x -> productMapper.convertToDto(x)).toList();
+		return products;
+	}
 }
