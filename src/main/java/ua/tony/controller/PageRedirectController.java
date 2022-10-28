@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageRedirectController {
 
 	/**
-	 * РњРµС‚РѕРґ СЏРєРёР№ РїРµСЂРµРЅР°РїСЂР°РІР»СЏС” РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РЅР° СЃС‚РѕСЂС–РЅРєСѓ Р РµС”СЃС‚СЂР°С†С–С—
+	 * Метод який перенаправляє користувача на сторінку Реєстрації
 	 * 
-	 * @return signup.html (СЃС‚РѕСЂС–РЅРєР° СЂРµС”СЃС‚СЂР°С†С–С—)
+	 * @return signup.html (сторінка реєстрації)
 	 */
 	@GetMapping(value = "/signup")
 	public String showSignUp() {
@@ -17,12 +17,17 @@ public class PageRedirectController {
 	}
 
 	/**
-	 * РњРµС‚РѕРґ СЏРєРёР№ РїРµСЂРµРЅР°РїСЂР°РІР»СЏС” РєРѕСЂРёСЃС‚СѓРІР°С‡Р° РЅР° СЃС‚РѕСЂС–РЅРєСѓ РђРІС‚РѕСЂРёР·Р°С†С–С—
+	 * Метод який перенаправляє користувача на сторінку Авторизації
 	 * 
-	 * @return login.html (СЃС‚РѕСЂС–РЅРєР° Р°РІС‚РѕСЂРёР·Р°С†С–С—)
+	 * @return login.html (сторінка авторизації)
 	 */
 	@GetMapping(value = "/login")
 	public String showLoginUp() {
 		return "login";
+	}
+	
+	@GetMapping(value="/myProfile")
+	public String showMyProfile() {
+	    return "user_page";
 	}
 }
