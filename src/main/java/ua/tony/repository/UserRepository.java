@@ -40,6 +40,7 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	 * @param user - користувач
 	 * @return користувач
 	 */
+	@SuppressWarnings("unchecked")
 	User save(User user);
 
 	/**

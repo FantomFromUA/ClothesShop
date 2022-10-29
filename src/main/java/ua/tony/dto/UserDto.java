@@ -1,17 +1,24 @@
 package ua.tony.dto;
 
-import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class UserDto {
 
 	private int id;
 
+	@NotEmpty(message = "should not be empty")
+	@Size(min = 2, message = "user name should have at least 2 characters")
 	private String name;
 
 	private String surname;
 
+	@NotEmpty(message = "should not be empty")
+	@Email(message = "email should be valid")
 	private String login;
 
+	@Size(min = 4, message = "password should have at least 4 characters")
 	private String password;
 
 	private double coins;

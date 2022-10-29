@@ -1,7 +1,9 @@
 package ua.tony.dto;
 
 import java.time.LocalDate;
-import java.util.List;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
 
 public class OrderDto {
 
@@ -15,6 +17,7 @@ public class OrderDto {
 
 	private boolean isCompleted;
 
+	@NotNull(message = "should not be empty")
 	private UserDto userDto;
 
 

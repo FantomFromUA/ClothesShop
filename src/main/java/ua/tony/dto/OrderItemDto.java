@@ -1,11 +1,15 @@
 package ua.tony.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class OrderItemDto {
 
 	private int id;
 
+	@NotNull(message = "should not be empty")
 	private OrderDto orderDto;
 
+	@NotNull(message = "should not be empty")
 	private ProductDto productDto;
 
 	public OrderItemDto() {
