@@ -1,4 +1,4 @@
-function show() {
+	function show() {
   var p = document.getElementById("password");
   p.setAttribute("type", "text");
 }
@@ -35,8 +35,13 @@ document.getElementById('login-button').addEventListener('click', async () => {
 	
 	const res = await fetch(`http://localhost:8082/users?user_login=${login.value}&password=${password.value}`);
 	
+	
 	console.log(login, password);
 	const user = await res.json();
+
+	window.location.href=`http://localhost:8082/myProfile`;
 	
 	console.log(user);
+	
+	
 })

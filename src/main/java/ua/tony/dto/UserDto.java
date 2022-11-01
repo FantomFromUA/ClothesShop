@@ -18,8 +18,6 @@ public class UserDto {
 
 	private boolean adminAccess;
 
-	private List<OrderDto> ordersDto;
-
 	public UserDto() {
 	}
 
@@ -86,14 +84,6 @@ public class UserDto {
 
 	public void setAdminAccess(boolean adminAccess) {
 		this.adminAccess = adminAccess;
-	}
-
-	public List<OrderDto> getOrdersDto() {
-		return ordersDto;
-	}
-
-	public void setOrdersDto(List<OrderDto> ordersDto) {
-		this.ordersDto = ordersDto;
 	}
 
 	@Override

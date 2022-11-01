@@ -44,11 +44,7 @@ public class ProductRestController {
 			return ResponseEntity.ok(product);
 		}
 		if (product_name == null && product_type != null && product_id == null) {
-			var temp = productService.findByType(product_type);
-			if (temp.size() == 0) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-			}
-			return ResponseEntity.ok(temp);
+			return ResponseEntity.ok(productService.findByType(product_type));
 		}
 		if (product_name != null && product_type == null && product_id == null)
 			return ResponseEntity.ok(productService.findByName(product_name));
@@ -72,8 +68,8 @@ public class ProductRestController {
 
 	@RequestMapping(value = "hoodies", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
 	@Operation(summary = "1.Helps to get all hoodies "
-			+ "2.Helps to get all hoodies which ordered by teir price. If you want to ascent price put this parametr : \"asc\" "
-			+ "3.Helps to get all hoodies which ordered by teir price. If you want to decline price put this parametr : \"desc\" ")
+			+ "2.Helps to get all hoodies which ordered by their price. If you want to ascent price put this parametr : \"asc\" "
+			+ "3.Helps to get all hoodies which ordered by their price. If you want to decline price put this parametr : \"desc\" ")
 	@ResponseBody
 	public ResponseEntity<List<ProductDto>> getHoodiesByPriceByGrowthOrByDeclByType(
 			@RequestParam(value = "sort", required = false) String sortOption) {
@@ -87,6 +83,42 @@ public class ProductRestController {
 			return ResponseEntity.ok(productService.getListOfProductsSortedByPriceDESC("hoodie"));
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	}
+	@RequestMapping(value = "jeans", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@Operation(summary = "1.Helps to get all jeans "
+		+ "2.Helps to get all jeans which ordered by their price. If you want to ascent price put this parametr : \"asc\" "
+		+ "3.Helps to get all jeans which ordered by their price. If you want to decline price put this parametr : \"desc\" ")
+	@ResponseBody
+	public ResponseEntity<List<ProductDto>> getJiensByPriceByGrowthOrByDeclByType(
+		@RequestParam(value = "sort", required = false) String sortOption) {
+	    
+	    if (sortOption == null)
+		return ResponseEntity.ok(productService.findByType("jeans"));
+	    if (sortOption.equals("asc")) {
+		return ResponseEntity.ok(productService.getListOfProductsSortedByPrice("jeans"));
+	    }
+	    if (sortOption.equals("desc"))
+		return ResponseEntity.ok(productService.getListOfProductsSortedByPriceDESC("jeans"));
+	    else
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+	}
+	@RequestMapping(value = "t-shirts", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	@Operation(summary = "1.Helps to get all t-shirts "
+		+ "2.Helps to get all t-shirts which ordered by their price. If you want to ascent price put this parametr : \"asc\" "
+		+ "3.Helps to get all t-shirts which ordered by their price. If you want to decline price put this parametr : \"desc\" ")
+	@ResponseBody
+	public ResponseEntity<List<ProductDto>> getThirtsByPriceByGrowthOrByDeclByType(
+		@RequestParam(value = "sort", required = false) String sortOption) {
+	    
+	    if (sortOption == null)
+		return ResponseEntity.ok(productService.findByType("t-shirts"));
+	    if (sortOption.equals("asc")) {
+		return ResponseEntity.ok(productService.getListOfProductsSortedByPrice("t-shirts"));
+	    }
+	    if (sortOption.equals("desc"))
+		return ResponseEntity.ok(productService.getListOfProductsSortedByPriceDESC("t-shirts"));
+	    else
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 
 	@RequestMapping(value = "products", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })

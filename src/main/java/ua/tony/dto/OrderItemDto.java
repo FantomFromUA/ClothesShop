@@ -30,8 +30,6 @@ public class OrderItemDto {
 
 	public void setOrderDto(OrderDto orderDto) {
 		this.orderDto = orderDto;
-		// orderDto.setTotalPrice(orderDto.getTotalPrice() +
-		// this.productDto.getPrice());
 	}
 
 	public ProductDto getProductDto() {
