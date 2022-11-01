@@ -40,20 +40,6 @@ public class GlobalExceptionHandling {
 	return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }*/
     
- /*   @Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		
-		Map<String, String> errors = new HashMap<>();
-		ex.getBindingResult().getAllErrors().forEach((error) ->{
-			
-			String fieldName = ((FieldError) error).getField();
-			String message = error.getDefaultMessage();
-			errors.put(fieldName, message);
-		});
-		return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
-	}
-*/
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<?> userNotFoundExceptionHandling(UserNotFoundException exception, WebRequest request) {
 	ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));

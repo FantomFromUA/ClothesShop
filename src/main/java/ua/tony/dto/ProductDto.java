@@ -1,17 +1,28 @@
 package ua.tony.dto;
 
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class ProductDto {
 
 	private int id;
 
+	@NotEmpty(message = "should not be empty")
+	@Size(min = 2, message = "product name should have at least 2 characters")
 	private String name;
 
+	@NotEmpty(message = "should not be empty")
+	@Size(min = 2, message = "product type should have at least 2 characters")
 	private String type;
 
 	private int code;
 
+	@NotEmpty(message = "should not be empty")
+	@Size(min = 1, max = 4, message = "product size should be in range 1 to 4")
 	private String size;
 
+	@DecimalMin("0.1") 
 	private double price;
 
 	private String description;
