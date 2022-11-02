@@ -39,7 +39,10 @@ document.getElementById('login-button').addEventListener('click', async () => {
 	console.log(login, password);
 	const user = await res.json();
 
+  //  window.localStorage.setItem('amogus',user);
+
 	window.location.href=`http://localhost:8082/myProfile`;
+	
 	
 	console.log(user);
 	

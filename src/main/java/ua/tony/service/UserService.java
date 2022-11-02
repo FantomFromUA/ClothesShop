@@ -121,7 +121,7 @@ public class UserService {
      * @param userId - id користувача
      * @return загальна ціна покупок
      */
-    public Double getPriceOfAllProductsThatUserBought(Integer userId) throws UserNotFoundException {
+    public Double getPriceOfAllProductsWhichUserBought(Integer userId) throws UserNotFoundException {
         
 	if(userRepo.findById(userId).isPresent()) {
 	List<Order> orders = orderRepo.getOrdersThatRelatedToUser(userId);
@@ -144,7 +144,7 @@ public class UserService {
 	List<UserDto> users = findAll();
 	Map<UserDto, Double> usersValueOfPurchases = new LinkedHashMap<>();
 	for (int i = 0; i < users.size(); i++) {
-	    usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsThatUserBought(users.get(i).getId()));
+	    usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsWhichUserBought(users.get(i).getId()));
 	}
 	return usersValueOfPurchases;
     }

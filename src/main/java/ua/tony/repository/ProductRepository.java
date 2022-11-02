@@ -66,7 +66,7 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 	// ???
 	@Query(value = "SELECT products.id,products.name,products.type,products.code,products.size,products.price,products.description,products.in_stock  FROM products "
 			+ "JOIN order_items ON order_items.product_id=products.id "
-			+ "JOIN orders ON orders.id=order_items.order_id " + "WHERE orders.user_id=:userId ", nativeQuery = true)
+			+ "JOIN orders ON orders.id=order_items.order_id " + "WHERE orders.user_id=:userId AND orders.completed=1", nativeQuery = true)
 	List<Product> getProductsThatBoughtUser(@Param("userId") Integer userId);
 
 	/**

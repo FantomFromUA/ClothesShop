@@ -59,9 +59,7 @@ public class UserRestController {
 		// Find by ID
 		if (user_id != null && user_login == null && purchases == null && password == null) {
 
-			List<UserDto> user = new ArrayList<>();
-			user.add(userService.findById(user_id));
-			return ResponseEntity.ok(user);
+			return ResponseEntity.ok(userService.findById(user_id));
 		}
 
 		// Find by login and password
@@ -77,9 +75,7 @@ public class UserRestController {
 		// Find by login
 		if (user_id == null && user_login != null && purchases == null && password == null) {
 
-			List<UserDto> user = new ArrayList<>();
-			user.add(userService.findByLogin(user_login));
-			return ResponseEntity.ok(user);
+			return ResponseEntity.ok(userService.findByLogin(user_login));
 		}
 		// Find All
 		if (user_id == null && user_login == null && purchases == null && password == null)
