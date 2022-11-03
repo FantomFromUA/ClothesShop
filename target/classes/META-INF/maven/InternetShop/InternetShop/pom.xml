@@ -11,6 +11,7 @@
 	</parent>
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/integrationTest/java</testSourceDirectory>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -25,7 +25,7 @@ public class OrderItem {
 	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH })
+	@OneToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,CascadeType.REMOVE })
 	@JoinColumn(name = "product_id")
 	private Product product;
 
