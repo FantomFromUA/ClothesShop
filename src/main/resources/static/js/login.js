@@ -34,12 +34,19 @@ document.getElementById('login-button').addEventListener('click', async () => {
 	const password = document.getElementById('password');
 	
 	const res = await fetch(`http://localhost:8082/users?user_login=${login.value}&password=${password.value}`);
-	
-	
+
 	console.log(login, password);
 	const user = await res.json();
 
-	window.location.href=`http://localhost:8082/myProfile`;
+  localstorage.setItem('userdata', user)
+
+  console.log(user);
+
+  //location.href = `http://localhost:8082/users?user_id=${user.id}`
+  window.location.href=`http://localhost:8082/myProfile`;
+  if (window.location.href.includes('myProfile')) {
+    localstorage.getItem('userdata');
+  }
 	
 	console.log(user);
 	

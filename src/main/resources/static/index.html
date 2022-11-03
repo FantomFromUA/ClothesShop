@@ -1,15 +1,240 @@
-<!DOCTYPE html>
+*<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <title>Sign Up</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abito</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <a href="signup">signup</a>
-  <a href="login">login</a>
-  <!--  <script src="../js/index.js"></script>-->
-</body>
+  <header class="header container">
+    <div class="navbar">
+      <a href="index.html" class="logo">
+      <img src="img/logo.svg" alt="Abito" class="logo-img">
+    </a>
+    <div class="navbar-panel">
+      <button class="close-menu"><svg  width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.5 0.5L16.5 16.5M0.5 16.5L16.5 0.5" stroke="black"/>
+        </svg></button>
+        
+      <!-- Навигация -->
+    <nav class="navbar-menu">
+      <ul class="menu">
+        <li class="menu-item">
+          <a href="#!" class="menu-link">
+            Послуги
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="#!" class="menu-link">
+            Про нас
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Вход и регистрация-->
+    <div class="button-group">
+      <a href="login" class="button button-link">Вхід та реєстрація</a>
+      <a href="#!" class="button button-primary">Додати об'яву</a>
+    </div>
+    <!-- /.button-group -->
+  </div>
+  <!-- /.navbar-panel -->
+    <div class="menu-button">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.937476 9.37501H29.0624C29.58 9.37501 29.9999 8.95498 29.9999 8.43754C29.9999 7.92002 29.5799 7.50006 29.0624 7.50006H0.937476C0.419955 7.50006 0 7.92009 0 8.43754C0 8.95498 0.420033 9.37501 0.937476 9.37501Z" fill="black"/>
+        <path d="M29.0624 14.0626H0.937476C0.419955 14.0626 0 14.4826 0 15C0 15.5175 0.420033 15.9375 0.937476 15.9375H29.0624C29.58 15.9375 29.9999 15.5175 29.9999 15C29.9999 14.4826 29.58 14.0626 29.0624 14.0626Z" fill="black"/>
+        <path d="M29.0625 20.625H10.3125C9.79495 20.625 9.375 21.0451 9.375 21.5625C9.375 22.08 9.79503 22.5 10.3125 22.5H29.0625C29.58 22.5 29.9999 22.0799 29.9999 21.5625C30 21.045 29.58 20.625 29.0625 20.625Z" fill="black"/>
+        </svg>
+        
+    </div>
+    </div>
+    <!-- /.navbar -->
+    <!-- Поисковая панель -->
+    <div class="search-panel">
+      <input type="search" class="search-input" id="searchplace" placeholder="Пошук за назвою">
+      <button class="search-button">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.6506 14.0012L10.0862 9.43675C10.9465 8.43352 11.4706 7.13293 11.4706 5.71058C11.4706 2.54822 8.89765 -0.0247192 5.7353 -0.0247192C4.20353 -0.0247192 2.76265 0.571751 1.67824 1.6544C0.595589 2.73793 -0.000881376 4.17881 9.77541e-07 5.71058C9.77541e-07 8.87293 2.57294 11.4459 5.7353 11.4459C7.15765 11.4459 8.45912 10.9218 9.46235 10.0615L14.0268 14.6259L14.6506 14.0012ZM5.7353 10.5635C3.06 10.5635 0.882354 8.38675 0.882354 5.71058C0.881472 4.41352 1.38618 3.19499 2.30294 2.2791C3.21882 1.36234 4.43824 0.857634 5.7353 0.857634C8.41059 0.857634 10.5882 3.0344 10.5882 5.71058C10.5882 8.38587 8.41059 10.5635 5.7353 10.5635Z" fill="white"/>
+          </svg>
+          
+        <span class="search-button-text">Шукати</span>
+      </button>
+    </div>
+    <!-- /.search-panel -->
+  </header>
+  <!-- Page content -->
+  <div class="page-content container">
+    <!-- Блок с обьявлениями -->
+<main class="main">
+  <h2 class="page-title">Рекомендації</h2>
+  <div class="cards">
+    <div class="card">
+      <a href="./components/single.html" class="card-link"><img src="img/main-image1.jpg" alt="photo" class="card-image"></a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link"><h3 class="card-title">
+          Электросамокат
+        </h3></a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        10 980 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Ново-Савиновский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+    <div class="card">
+      <a href="./components/single.html" class="card-link"><img src="img/main-image2.jpg" alt="photo" class="card-image"></a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link">
+          <h3 class="card-title">
+            Пвх материал 2й сорт
+          </h3>
+        </a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        170 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Вахитовский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+    <div class="card">
+      <a href="./components/single.html" class="card-link"><img src="img/main-image3.jpg" alt="photo" class="card-image"></a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link">
+          <h3 class="card-title">
+            Двухсторонняя ветровка для мальчика
+          </h3>
+        </a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        2 110 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Вахитовский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+    <div class="card">
+      <a href="./components/single.html" class="card-link">
+        <img src="img/main-image4.jpg" alt="photo" class="card-image">
+      </a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link">
+          <h3 class="card-title">
+            Пеленальная доска на комод
+          </h3>
+        </a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        200 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Вахитовский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+    <div class="card">
+      <a href="./components/single.html" class="card-link">
+        <img src="img/main-image5.jpg" alt="photo" class="card-image">
+      </a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link">
+          <h3 class="card-title">
+            Участок 8 сот. (ИЖС)
+          </h3>
+        </a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        101 980 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Вахитовский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+    <div class="card">
+      <a href="./components/single.html" class="card-link">
+        <img src="img/main-image6.jpg" alt="photo" class="card-image">
+      </a>
+      <div class="card-header">
+        <a href="./components/single.html" class="card-link">
+          <h3 class="card-title">
+            Ford Fusion, 2007
+          </h3>
+        </a>
+       <button class="like">
+          <img src="img/likebutton.svg" alt="like">
+        </button>
+      </div>
+      <!-- /.card-header -->
+      <strong class="card-price">
+        304 000 ₽
+      </strong>
+      <p class="card-text">Казань, р-н Вахитовский</p>
+      <p class="card-text">10 июля 11:39</p>
+     </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.cards -->
+</main>
+<!-- Sidebar -->
+<aside class="sidebar">
+<h4 class="page-title">Сервіс</h4>
+<div class="service">
+  <img src="img/dostavka.svg" alt="icon: shipping" class="service-image">
+  <h5 class="service-title">Доставка</h5>
+  <p class="service-text">Відправлення накладним платежем</p>
+</div>
+<!-- /.service -->
+<div class="service">
+  <img src="img/avto.svg" alt="icon: " class="service-image">
+  <h5 class="service-title">Свій принт</h5>
+  <p class="service-text">Зв'яжіться з нами в телеграм і замовляйте власний принт</p>
+</div>
 
+<!-- /.service -->
+<hr color="#E5E5E5">
+<footer class="footer">
+  <p class="footer-text">© ООО «Абито», 2011–2021</p>
+  
+  <ul class="footer-menu">
+    <li class="footer-menu-item">
+      <a href="#!" class="footer-link">Реклама</a>
+    </li>
+    <li class="footer-menu-item">
+      <a href="#!" class="footer-link">Допомога</a>
+    </li>
+  </ul>
+</footer>
+</aside>
+  </div>
+  <!-- /.page-content -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/search.js"></script>
+</body>
 </html>
