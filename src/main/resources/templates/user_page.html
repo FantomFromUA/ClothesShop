@@ -1,16 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="../css/login.css" />
-	<title>User page</title>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-	
+	<h1>Hello world</h1>
+	<div id="vue">
+
+		<h3>{{ textSearch }} (длина: {{ textSearch.length }})</h3>
+		<input type="text" size="50" v-model="textSearch">
+
+		<button type="button" @click="getUsers">Дані юзера</button>
+
+		<h1 :class="[ isActive ? 'active' : 'disable']">TEST</h1>
+
+		<ul>
+			<li v-for="user in users">1.{{ user.name }} 2.{{ user.surname }}</li>
+		</ul>
+		
+
+	</div>
+
+	<script type="text/javascript">
+		var app = new Vue({
+			el: '#vue',
+			data: {
+				isActive: false,
+				users: [],
+				textSearch: '',
+				url: {
+					users: `http://localhost:8082/users`,
+				}
+			},
+			watch: {
+				textSearch: function () {
+					if (this.textSearch.length > 3) {
+						this.textSearch = 'Меняем содержимое поля из кода';
+					}
+				}
+			},
+			methods: {
+				getUsers() {
+					axios.get(this.url.users).then((response) => {
+						console.log(this);
+						this.users = response.data;
+					});
+				},
+			}/*,
+			mounted() {
+				this.userAmogus = localStorage.getItem('amogus')
+			}*/
+
+		})
+	</script>
 </body>
 
 </html>

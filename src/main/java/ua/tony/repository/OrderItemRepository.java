@@ -72,6 +72,6 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Integer> 
 	 * @return список елементів заказу
 	 */
 	public @Query(value = "SELECT order_items.id,order_items.product_id,order_items.order_id FROM order_items "
-			+ "WHERE order_items.order_id=:orderId ", nativeQuery = true) List<OrderItem> getOrderItemsThatRelatedToOrder(
+			+ "WHERE order_items.order_id=:orderId ", nativeQuery = true) List<OrderItem> getOrderItemsWhichRelatedToOrder(
 					@Param("orderId") Integer orderId);
 }

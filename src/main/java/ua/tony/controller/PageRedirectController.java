@@ -30,4 +30,9 @@ public class PageRedirectController {
 	public String showMyProfile() {
 	    return "user_page";
 	}
+	
+	@GetMapping(value="/hoodiePage")
+	public String showHoodies() {
+	    return "hoodie_page";
+	}
 }

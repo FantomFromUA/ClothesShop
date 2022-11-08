@@ -140,7 +140,7 @@ public class OrderService {
      * @param userId - id користувача
      * @return список заказів
      */
-    public List<OrderDto> getOrdersThatRelatedToUser(Integer userId) throws OrderNotFoundException {
+    public List<OrderDto> getOrdersWhichRelatedToUser(Integer userId) throws OrderNotFoundException {
          
 	if(orderRepo.getOrdersThatRelatedToUser(userId).size()>0)
 	{

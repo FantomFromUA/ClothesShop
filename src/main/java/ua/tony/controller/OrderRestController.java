@@ -61,7 +61,7 @@ public class OrderRestController {
 	    return ResponseEntity.ok(orderService.findByDeliveryDate(deliveryDate));
 	}
 	if (order_id == null && order_date == null && delivery_date == null && user_id != null) {
-	    return ResponseEntity.ok(orderService.getOrdersThatRelatedToUser(user_id));
+	    return ResponseEntity.ok(orderService.getOrdersWhichRelatedToUser(user_id));
 	} else
 	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }

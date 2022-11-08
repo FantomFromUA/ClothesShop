@@ -1,15 +1,10 @@
 package ua.tony;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import ua.tony.dto.ProductDto;
-import ua.tony.dto.UserDto;
 import ua.tony.mapper.OrderItemMapper;
 import ua.tony.mapper.OrderMapper;
 import ua.tony.mapper.ProductMapper;
@@ -26,7 +21,7 @@ import ua.tony.service.UserService;
 @SpringBootApplication
 public class Runner implements CommandLineRunner {
 
-	@Autowired
+/*	@Autowired
 	private ProductRepository productRepository;
 
 	@Autowired
@@ -60,7 +55,7 @@ public class Runner implements CommandLineRunner {
 	private OrderItemService orderItemService;
 
 	@Autowired
-	private ProductService productService;
+	private ProductService productService; */
 
 	public static void main(String[] args) {
 		SpringApplication.run(Runner.class, args);
@@ -87,7 +82,7 @@ public class Runner implements CommandLineRunner {
 //    	
 //    	orderRepository.save(order);
 
-////		ORDER DELETE	
+////		ORDER DELETE		
 //    	orderRepository.deleteById(7);
 
 ////		PRODUCT CREATION	
@@ -108,7 +103,7 @@ public class Runner implements CommandLineRunner {
 //	
 //		orderItemRepository.save(orderItem);    	
 
-////		ORDER ITEM DELETE	
+////		DORDER ITEM DELETE	
 //    	orderItemRepository.deleteById(1);
 
 ////		SOME SHIT
