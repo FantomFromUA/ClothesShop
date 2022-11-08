@@ -22,7 +22,7 @@ public class ProductDto {
 	@Size(min = 1, max = 4, message = "product size should be in range 1 to 4")
 	private String size;
 
-	@DecimalMin("0.1") 
+	@DecimalMin("0.1")
 	private double price;
 
 	private String description;

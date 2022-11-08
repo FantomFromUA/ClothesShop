@@ -37,91 +37,97 @@ import ua.tony.service.UserService;
 @AutoConfigureMockMvc
 public class IntegratedOrderItemControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Autowired
-    OrderService orderService;
-    @Autowired
-    OrderItemService orderItemService;
-    @Autowired
-    UserService userService;
-    @Autowired
-    ProductService productService;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired 
-    private DataBaseEntitiesGenerator generator;
+	@Autowired
+	OrderService orderService;
+	@Autowired
+	OrderItemService orderItemService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	ProductService productService;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private DataBaseEntitiesGenerator generator;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-	generator.generateEntities();
-    }
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+		generator.generateEntities();
+	}
 
-    @AfterEach
-    public void cleanDb() {
-	generator.cleanDataBase();
-    }
+	@AfterEach
+	public void cleanDb() {
+		generator.cleanDataBase();
+	}
 
-    @Test
-    public void findByIdTest() throws Exception {
-        UserDto user=userService.findByLogin("hello@adad");
-        List<OrderDto> orders=orderService.getOrdersWhichRelatedToUser(user.getId());
-        List<OrderItemDto> orderItems=orderItemService.findByOrderId(orders.get(0).getId());
-	mockMvc.perform(get("/orderItems?order_item_id="+orderItems.get(0).getId()).accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
-    }
-    @Test
-    public void findByOrderIdTest() throws Exception {
-	UserDto user=userService.findByLogin("hello@adad");
-	List<OrderDto> orders=orderService.getOrdersWhichRelatedToUser(user.getId());
-	List<OrderItemDto> orderItems=orderItemService.findByOrderId(orders.get(0).getId());
-	mockMvc.perform(get("/orderItems?order_id="+orders.get(0).getId()).accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
-    }
-    @Test
-    public void findByProductIdTest() throws Exception {
-	List<ProductDto> product=productService.findByType("jeans");
-	OrderItemDto orderItem=orderItemService.findByProductId(product.get(0).getId());
-	List<OrderItemDto> orderItems=new ArrayList<>();
-	orderItems.add(orderItem);
-	mockMvc.perform(get("/orderItems?product_id="+product.get(0).getId()).accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
-    }
+	@Test
+	public void findByIdTest() throws Exception {
+		UserDto user = userService.findByLogin("hello@adad");
+		List<OrderDto> orders = orderService.getOrdersWhichRelatedToUser(user.getId());
+		List<OrderItemDto> orderItems = orderItemService.findByOrderId(orders.get(0).getId());
+		mockMvc.perform(
+				get("/orderItems?order_item_id=" + orderItems.get(0).getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
+	}
 
-    @Test
-    public void findAllTest() throws Exception {
-	List<ProductDto> product=productService.findByType("jeans");
-	OrderItemDto orderItem=orderItemService.findByProductId(product.get(0).getId());
-	List<OrderItemDto> orderItems=new ArrayList<>();
-	orderItems.add(orderItem);
-	mockMvc.perform(get("/orderItems").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
-    }
+	@Test
+	public void findByOrderIdTest() throws Exception {
+		UserDto user = userService.findByLogin("hello@adad");
+		List<OrderDto> orders = orderService.getOrdersWhichRelatedToUser(user.getId());
+		List<OrderItemDto> orderItems = orderItemService.findByOrderId(orders.get(0).getId());
+		mockMvc.perform(get("/orderItems?order_id=" + orders.get(0).getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
+	}
 
-    @Test
-    public void addOrderItemTest() throws Exception {
+	@Test
+	public void findByProductIdTest() throws Exception {
+		List<ProductDto> product = productService.findByType("jeans");
+		OrderItemDto orderItem = orderItemService.findByProductId(product.get(0).getId());
+		List<OrderItemDto> orderItems = new ArrayList<>();
+		orderItems.add(orderItem);
+		mockMvc.perform(get("/orderItems?product_id=" + product.get(0).getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
+	}
 
-	List<ProductDto> product=productService.findByType("jeans");
-	OrderItemDto orderItem=orderItemService.findByProductId(product.get(0).getId());
-	mockMvc.perform(post("/orderItems").content(objectMapper.writeValueAsString(orderItem)).contentType("application/json"))
-		.andExpect(status().isCreated());
-    }
+	@Test
+	public void findAllTest() throws Exception {
+		List<ProductDto> product = productService.findByType("jeans");
+		OrderItemDto orderItem = orderItemService.findByProductId(product.get(0).getId());
+		List<OrderItemDto> orderItems = new ArrayList<>();
+		orderItems.add(orderItem);
+		mockMvc.perform(get("/orderItems").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(orderItems)));
+	}
 
-    @Test
-    public void shouldReturn404ErrorWhenOrderItemNotFound() throws Exception {
+	@Test
+	public void addOrderItemTest() throws Exception {
 
-	mockMvc.perform(get("/orderItems?order_item_id=666").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-    }
+		List<ProductDto> product = productService.findByType("jeans");
+		OrderItemDto orderItem = orderItemService.findByProductId(product.get(0).getId());
+		mockMvc.perform(
+				post("/orderItems").content(objectMapper.writeValueAsString(orderItem)).contentType("application/json"))
+				.andExpect(status().isCreated());
+	}
 
-    @Test
-    public void shouldReturn404ErrorWhenOrderItemNotDeleted() throws Exception {
+	@Test
+	public void shouldReturn404ErrorWhenOrderItemNotFound() throws Exception {
 
-	mockMvc.perform(MockMvcRequestBuilders.delete("/orderItems?order_item_id=777").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNotFound());
-    }
+		mockMvc.perform(get("/orderItems?order_item_id=666").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenOrderItemNotDeleted() throws Exception {
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/orderItems?order_item_id=777").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 }

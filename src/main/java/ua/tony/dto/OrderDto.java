@@ -20,7 +20,6 @@ public class OrderDto {
 	@NotNull(message = "should not be empty")
 	private UserDto userDto;
 
-
 	public OrderDto() {
 
 	}
@@ -72,7 +71,6 @@ public class OrderDto {
 	public void setUserDto(UserDto userDto) {
 		this.userDto = userDto;
 	}
-
 
 	@Override
 	public String toString() {

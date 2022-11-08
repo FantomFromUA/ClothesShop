@@ -21,65 +21,65 @@ import ua.tony.entity.User;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class OrderItemRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
+	@Autowired
+	private TestEntityManager entityManager;
 
-    @Autowired
-    OrderRepository orderRepository;
-    
-    @Autowired
-    OrderItemRepository orderItemRepository;
+	@Autowired
+	OrderRepository orderRepository;
 
-    @BeforeEach
-    void beforeEach() {
-	orderItemRepository.deleteAll();
-	orderRepository.deleteAll();
-    }
+	@Autowired
+	OrderItemRepository orderItemRepository;
 
-    @AfterEach
-    void afterEach() {
-	orderItemRepository.deleteAll();
-	orderRepository.deleteAll();
-    }
+	@BeforeEach
+	void beforeEach() {
+		orderItemRepository.deleteAll();
+		orderRepository.deleteAll();
+	}
 
-    @Test
-    public void shouldBeEmpty() {
-	List<OrderItem> orderItems = orderItemRepository.findAll();
+	@AfterEach
+	void afterEach() {
+		orderItemRepository.deleteAll();
+		orderRepository.deleteAll();
+	}
 
-	assertThat(orderItems).isEmpty();
-    }
+	@Test
+	public void shouldBeEmpty() {
+		List<OrderItem> orderItems = orderItemRepository.findAll();
 
-    @Test
-    public void addOrderItem() {
-	OrderItem orderItem = new OrderItem();
-        orderItemRepository.save(orderItem);
-	assertThat(orderItem.getId()).isEqualTo(3);
+		assertThat(orderItems).isEmpty();
+	}
 
-    }
+	@Test
+	public void addOrderItem() {
+		OrderItem orderItem = new OrderItem();
+		orderItemRepository.save(orderItem);
+		assertThat(orderItem.getId()).isEqualTo(3);
 
-    @Test
-    public void findOrderItemById() {
-	OrderItem orderItem = new OrderItem();
-        orderItemRepository.save(orderItem);
-	OrderItem orderItem2 = orderItemRepository.findById(4).get();
-	assertThat(orderItem2.getId()).isEqualTo(4);
+	}
 
-    }
+	@Test
+	public void findOrderItemById() {
+		OrderItem orderItem = new OrderItem();
+		orderItemRepository.save(orderItem);
+		OrderItem orderItem2 = orderItemRepository.findById(4).get();
+		assertThat(orderItem2.getId()).isEqualTo(4);
 
-    @Test
-    public void shouldBeAllEmpty() {
-	List<OrderItem> orderItems = orderItemRepository.findAll();
+	}
 
-	assertThat(orderItems).isEmpty();
-    }
+	@Test
+	public void shouldBeAllEmpty() {
+		List<OrderItem> orderItems = orderItemRepository.findAll();
 
-    @Test
-    public void findAllOrderItems() {
-	OrderItem orderItem = new OrderItem();
-        orderItemRepository.save(orderItem);
-        OrderItem orderItem2 = new OrderItem();
-        orderItemRepository.save(orderItem2);
-	assertThat(orderItemRepository.findAll().size()).isEqualTo(2);
-    }
+		assertThat(orderItems).isEmpty();
+	}
+
+	@Test
+	public void findAllOrderItems() {
+		OrderItem orderItem = new OrderItem();
+		orderItemRepository.save(orderItem);
+		OrderItem orderItem2 = new OrderItem();
+		orderItemRepository.save(orderItem2);
+		assertThat(orderItemRepository.findAll().size()).isEqualTo(2);
+	}
 
 }

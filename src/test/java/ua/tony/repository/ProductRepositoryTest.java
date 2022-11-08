@@ -20,139 +20,149 @@ import ua.tony.entity.Product;
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 public class ProductRepositoryTest {
 
-    @Autowired
-    private TestEntityManager entityManager;
+	@Autowired
+	private TestEntityManager entityManager;
 
-    @Autowired
-    ProductRepository productRepository;
+	@Autowired
+	ProductRepository productRepository;
 
-    @BeforeEach
-    void beforeEach() {
-	productRepository.deleteAll();
-    }
+	@BeforeEach
+	void beforeEach() {
+		productRepository.deleteAll();
+	}
 
-    @AfterEach
-    void afterEach() {
-	productRepository.deleteAll();
-    }
+	@AfterEach
+	void afterEach() {
+		productRepository.deleteAll();
+	}
 
-    @Test
-    public void shouldBeEmpty() {
-	List<Product> products = productRepository.findAll();
+	@Test
+	public void shouldBeEmpty() {
+		List<Product> products = productRepository.findAll();
 
-	assertThat(products).isEmpty();
-    }
+		assertThat(products).isEmpty();
+	}
 
-    @Test
-    public void addUser() {
-	Product prodcut = new Product();
-	prodcut.setName("name");
-	Product product2 = productRepository.save(prodcut);
-	assertThat(product2.getName()).isEqualTo("name");
+	@Test
+	public void addProduct() {
+		Product product = new Product();
+		product.setName("name");
+		product.setType("jeans");
+		product.setCode(222);
+		product.setPrice(337.1);
+		Product product2 = productRepository.save(product);
+		assertThat(product2.getName()).isEqualTo("name");
 
-    }
+	}
 
-    @Test
-    public void findProductById() {
-	Product product = new Product();
-	product.setName("name");
-	productRepository.save(product);
-	Product product2 = productRepository.findById(6).get();
-	assertThat(product2.getName()).isEqualTo("name");
+	@Test
+	public void findProductById() {
+		Product product = new Product();
+		product.setName("name");
+		productRepository.save(product);
+		Product product2 = productRepository.findById(5).get();
+		assertThat(product2.getName()).isEqualTo("name");
 
-    }
+	}
 
-    @Test
-    public void shouldBeAllEmpty() {
-	List<Product> products = productRepository.findAll();
+	@Test
+	public void shouldBeAllEmpty() {
+		List<Product> products = productRepository.findAll();
 
-	assertThat(products).isEmpty();
-    }
+		assertThat(products).isEmpty();
+	}
 
-    @Test
-    public void findProductsByName() {
-	Product product = new Product();
-	product.setName("name");
-	product.setPrice(337);
-	productRepository.save(product);
-	List<Product> products = productRepository.findByName("name");
-	assertThat(products.get(0).getName()).isEqualTo("name");
-	assertThat(products.get(0).getPrice()).isEqualTo(337);
-    }
-    @Test
-    public void findProductsByType() {
-	Product product = new Product();
-	product.setName("name");
-	product.setPrice(337);
-	product.setType("jeans");
-	productRepository.save(product);
-	List<Product> products = productRepository.findByType("jeans");
-	assertThat(products.get(0).getName()).isEqualTo("name");
-	assertThat(products.get(0).getPrice()).isEqualTo(337);
-	assertThat(products.get(0).getType()).isEqualTo("jeans");
-    }
+	@Test
+	public void findProductsByName() {
+		Product product = new Product();
+		product.setName("name");
+		product.setType("jeans");
+		product.setCode(222);
+		product.setPrice(337.1);
+		productRepository.save(product);
+		List<Product> products = productRepository.findByName("name");
+		assertThat(products.get(0).getName()).isEqualTo("name");
+		assertThat(products.get(0).getPrice()).isEqualTo(337.1);
+	}
 
-    @Test
-    public void findAllProducts() {
-	Product product = new Product();
-	Product product2 = new Product();
-	product.setName("name");
-	product.setPrice(337);
-	product.setType("jeans");
-	product2.setName("name1");
-	product2.setPrice(3371);
-	product2.setType("jeans");
-	productRepository.save(product);
-	productRepository.save(product2);
-	assertThat(productRepository.findAll().size()).isEqualTo(2);
-	assertThat(productRepository.findAll().get(0).getType()).isEqualTo("jeans");
-    }
-    @Test
-    public void getListOfProductsSortedByPriceASC() {
-	Product product = new Product();
-	Product product2 = new Product();
-	product.setName("name");
-	product.setPrice(337);
-	product.setType("jeans");
-	product.setCode(111);
-	product.setDescription("notBad");
-	product.setSize("xxl");
-	product.setInStock(true);
-	product2.setName("name1");
-	product2.setPrice(3371);
-	product2.setType("jeans");
-	product2.setCode(222);
-	product2.setDescription("notBad");
-	product.setSize("xxl");
-	product2.setInStock(true);
-	productRepository.save(product);
-	productRepository.save(product2);
-	assertThat(productRepository.findAll().size()).isEqualTo(2);
-	assertThat(productRepository.getListOfProductsSortedByPrice("jeans").size()).isEqualTo(2);
-	assertThat(productRepository.getListOfProductsSortedByPrice("jeans").get(0).getPrice()).isEqualTo(337);
-    }
-    @Test
-    public void getListOfProductsSortedByPriceDesc() {
-	Product product = new Product();
-	Product product2 = new Product();
-	product.setName("name");
-	product.setPrice(337);
-	product.setType("jeans");
-	product.setCode(111);
-	product.setDescription("notBad");
-	product.setSize("xxl");
-	product.setInStock(true);
-	product2.setName("name1");
-	product2.setPrice(3371);
-	product2.setType("jeans");
-	product2.setCode(222);
-	product2.setDescription("notBad");
-	product.setSize("xxl");
-	product2.setInStock(true);
-	productRepository.save(product);
-	productRepository.save(product2);
-	assertThat(productRepository.findAll().size()).isEqualTo(2);
-	assertThat(productRepository.getListOfProductsSortedByPriceDESC("jeans").size()).isEqualTo(2);
-	assertThat(productRepository.getListOfProductsSortedByPriceDESC("jeans").get(0).getPrice()).isEqualTo(3371);
-    }
+	@Test
+	public void findProductsByType() {
+		Product product = new Product();
+		product.setName("name");
+		product.setPrice(337);
+		product.setType("jeans");
+		productRepository.save(product);
+		List<Product> products = productRepository.findByType("jeans");
+		assertThat(products.get(0).getName()).isEqualTo("name");
+		assertThat(products.get(0).getPrice()).isEqualTo(337);
+		assertThat(products.get(0).getType()).isEqualTo("jeans");
+	}
+
+	@Test
+	public void findAllProducts() {
+		Product product = new Product();
+		Product product2 = new Product();
+		product.setName("name");
+		product.setPrice(337);
+		product.setType("jeans");
+		product.setCode(221);
+		product2.setName("name1");
+		product2.setPrice(3371);
+		product2.setType("jeans");
+		product2.setCode(223);
+		productRepository.save(product);
+		productRepository.save(product2);
+		assertThat(productRepository.findAll().size()).isEqualTo(2);
+		assertThat(productRepository.findAll().get(0).getType()).isEqualTo("jeans");
+	}
+
+	@Test
+	public void getListOfProductsSortedByPriceASC() {
+		Product product = new Product();
+		Product product2 = new Product();
+		product.setName("name");
+		product.setPrice(337);
+		product.setType("jeans");
+		product.setCode(111);
+		product.setDescription("notBad");
+		product.setSize("xxl");
+		product.setInStock(true);
+		product2.setName("name1");
+		product2.setPrice(3371);
+		product2.setType("jeans");
+		product2.setCode(222);
+		product2.setDescription("notBad");
+		product.setSize("xxl");
+		product2.setInStock(true);
+		productRepository.save(product);
+		productRepository.save(product2);
+		assertThat(productRepository.findAll().size()).isEqualTo(2);
+		assertThat(productRepository.getListOfProductsSortedByPrice("jeans").size()).isEqualTo(2);
+		assertThat(productRepository.getListOfProductsSortedByPrice("jeans").get(0).getPrice()).isEqualTo(337);
+	}
+
+	@Test
+	public void getListOfProductsSortedByPriceDesc() {
+		Product product = new Product();
+		Product product2 = new Product();
+		product.setName("name");
+		product.setPrice(337);
+		product.setType("jeans");
+		product.setCode(111);
+		product.setDescription("notBad");
+		product.setSize("xxl");
+		product.setInStock(true);
+		product2.setName("name1");
+		product2.setPrice(3371);
+		product2.setType("jeans");
+		product2.setCode(222);
+		product2.setDescription("notBad");
+		product.setSize("xxl");
+		product2.setInStock(true);
+		productRepository.save(product);
+		productRepository.save(product2);
+		assertThat(productRepository.findAll().size()).isEqualTo(2);
+		assertThat(productRepository.getListOfProductsSortedByPriceDESC("jeans").size()).isEqualTo(2);
+		assertThat(productRepository.getListOfProductsSortedByPriceDESC("jeans").get(0).getPrice()).isEqualTo(3371);
+	}
 }
