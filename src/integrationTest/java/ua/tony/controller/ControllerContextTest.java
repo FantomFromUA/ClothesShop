@@ -9,22 +9,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class ControllerContextTest {
 
-    @Autowired
-    private UserRestController userController;
-    @Autowired
-    private ProductRestController productController;
-    @Autowired
-    private OrderRestController orderController;
-    @Autowired
-    private OrderItemRestController orderItemController;
+	@Autowired
+	private UserRestController userController;
+	@Autowired
+	private ProductRestController productController;
+	@Autowired
+	private OrderRestController orderController;
+	@Autowired
+	private OrderItemRestController orderItemController;
 
-    @Test
-    public void contextLoads() throws Exception {
-	assertThat(userController).isNotNull();
-	assertThat(productController).isNotNull();
-	assertThat(orderController).isNotNull();
-	assertThat(orderItemController).isNotNull();
+	@Test
+	public void contextLoads() throws Exception {
+		assertThat(userController).isNotNull();
+		assertThat(productController).isNotNull();
+		assertThat(orderController).isNotNull();
+		assertThat(orderItemController).isNotNull();
 
-    }
+	}
 }
-

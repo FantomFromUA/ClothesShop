@@ -42,134 +42,125 @@ import ua.tony.service.ProductService;
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = { Runner.class })
 public class ProductControllerTest {
 
-    
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @InjectMocks
-    ProductRestController productController;
+	@InjectMocks
+	ProductRestController productController;
 
-    @MockBean
-    ProductService productService;
-    @Autowired
-    private ObjectMapper objectMapper;
+	@MockBean
+	ProductService productService;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-    @Test
-    public void findByIdTest() throws Exception {
-	ProductDto product = new ProductDto();
-	product.setName("tomcat");
-	product.setCode(335);
-	product.setId(1);
-	List<ProductDto> products=new ArrayList<>();
-	products.add(product);
-	when(productService.findById(1)).thenReturn(product);
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+	}
 
-	mockMvc.perform(get("/products?product_id=1").accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isOk())
-	       .andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
-    
-    @Test
-    public void findByNameTest() throws Exception {
-	ProductDto product = new ProductDto();
-	product.setName("tomcat");
-	product.setCode(335);
-	product.setId(1);
-	List<ProductDto> products=new ArrayList<>();
-	products.add(product);
-	when(productService.findByName("tomcat")).thenReturn(products);
+	@Test
+	public void findByIdTest() throws Exception {
+		ProductDto product = new ProductDto();
+		product.setName("tomcat");
+		product.setCode(335);
+		product.setId(1);
+		List<ProductDto> products = new ArrayList<>();
+		products.add(product);
+		when(productService.findById(1)).thenReturn(product);
 
-	mockMvc.perform(get("/products?product_name=tomcat").accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isOk())
-	       .andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
-    
-    @Test
-    public void findByTypeTest() throws Exception {
-	ProductDto product = new ProductDto();
-	product.setName("tomcat");
-	product.setCode(335);
-	product.setId(1);
-	product.setType("jeans");
-	List<ProductDto> products=new ArrayList<>();
-	products.add(product);
-	when(productService.findByType("jeans")).thenReturn(products);
-	
-	mockMvc.perform(get("/products?product_type=jeans").accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk())
-	.andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
+		mockMvc.perform(get("/products?product_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-    @Test
-    public void findAllTest() throws Exception {
-        ProductDto p1=new ProductDto();
-        ProductDto p2=new ProductDto();
-        ProductDto p3=new ProductDto();
-        p1.setName("tom"); 
-        p2.setName("bob"); 
-        p3.setName("monster"); 
-	List<ProductDto> products = new ArrayList<>();
-	products.add(p1);
-	products.add(p2);
-	products.add(p3);
+	@Test
+	public void findByNameTest() throws Exception {
+		ProductDto product = new ProductDto();
+		product.setName("tomcat");
+		product.setCode(335);
+		product.setId(1);
+		List<ProductDto> products = new ArrayList<>();
+		products.add(product);
+		when(productService.findByName("tomcat")).thenReturn(products);
 
-	when(productService.findAll()).thenReturn(products);
+		mockMvc.perform(get("/products?product_name=tomcat").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-	mockMvc.perform(get("/products")
-		.accept(MediaType.APPLICATION_JSON))
-	        .andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
-    
-    @Test
-    public void addProductTest() throws Exception {
-	ProductDto product=new ProductDto();
-	product.setId(1);
-	product.setName("tomfdf");
-	product.setCode(333);
-	product.setType("hoodie");
-	product.setPrice(345);
-	product.setSize("xxl");
-	when(productService.save(any(ProductDto.class))).thenReturn(product);
+	@Test
+	public void findByTypeTest() throws Exception {
+		ProductDto product = new ProductDto();
+		product.setName("tomcat");
+		product.setCode(335);
+		product.setId(1);
+		product.setType("jeans");
+		List<ProductDto> products = new ArrayList<>();
+		products.add(product);
+		when(productService.findByType("jeans")).thenReturn(products);
 
-	mockMvc.perform(post("/products")
-		.content(objectMapper.writeValueAsString(product))
-		.contentType("application/json")).andExpect(status().isCreated());
-    }
-    
-    @Test
-    public void deleteProduct() throws Exception{
-	
-      Mockito.doNothing().when(productService).deleteById(1);
-      mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/products?product_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNoContent());
-    }
-    
-    @Test
-    public void shouldReturn404ErrorWhenProductNotFound() throws Exception{
+		mockMvc.perform(get("/products?product_type=jeans").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
- 	when(productService.findById(1)).thenThrow( new ProductNotFoundException("product is not found by this id:1"));
+	@Test
+	public void findAllTest() throws Exception {
+		ProductDto p1 = new ProductDto();
+		ProductDto p2 = new ProductDto();
+		ProductDto p3 = new ProductDto();
+		p1.setName("tom");
+		p2.setName("bob");
+		p3.setName("monster");
+		List<ProductDto> products = new ArrayList<>();
+		products.add(p1);
+		products.add(p2);
+		products.add(p3);
 
- 	mockMvc.perform(get("/products?product_id=1").accept(MediaType.APPLICATION_JSON))
- 	       .andExpect(status().isNotFound());
-    }
-    
-   @Test
-    public void shouldReturn404ErrorWhenProductNotDeleted() throws Exception{
-	
-       
-	Mockito.doThrow(new ProductNotDeletedException("product is not deleted by this id:1")).when(productService).deleteById(1);
-	 mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/products?product_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNotFound());
-    }
+		when(productService.findAll()).thenReturn(products);
+
+		mockMvc.perform(get("/products").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
+
+	@Test
+	public void addProductTest() throws Exception {
+		ProductDto product = new ProductDto();
+		product.setId(1);
+		product.setName("tomfdf");
+		product.setCode(333);
+		product.setType("hoodie");
+		product.setPrice(345);
+		product.setSize("xxl");
+		when(productService.save(any(ProductDto.class))).thenReturn(product);
+
+		mockMvc.perform(
+				post("/products").content(objectMapper.writeValueAsString(product)).contentType("application/json"))
+				.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void deleteProduct() throws Exception {
+
+		Mockito.doNothing().when(productService).deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/products?product_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenProductNotFound() throws Exception {
+
+		when(productService.findById(1)).thenThrow(new ProductNotFoundException("product is not found by this id:1"));
+
+		mockMvc.perform(get("/products?product_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenProductNotDeleted() throws Exception {
+
+		Mockito.doThrow(new ProductNotDeletedException("product is not deleted by this id:1")).when(productService)
+				.deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/products?product_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 }

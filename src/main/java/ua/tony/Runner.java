@@ -21,41 +21,31 @@ import ua.tony.service.UserService;
 @SpringBootApplication
 public class Runner implements CommandLineRunner {
 
-/*	@Autowired
-	private ProductRepository productRepository;
-
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private OrderRepository orderRepository;
-
-	@Autowired
-	private OrderItemRepository orderItemRepository;
-
-	@Autowired
-	private ProductMapper productMapper;
-
-	@Autowired
-	private UserMapper userMapper;
-
-	@Autowired
-	private OrderMapper orderMapper;
-
-	@Autowired
-	private OrderItemMapper orderItemMapper;
-
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private OrderService orderService;
-
-	@Autowired
-	private OrderItemService orderItemService;
-
-	@Autowired
-	private ProductService productService; */
+	/*
+	 * @Autowired private ProductRepository productRepository;
+	 * 
+	 * @Autowired private UserRepository userRepository;
+	 * 
+	 * @Autowired private OrderRepository orderRepository;
+	 * 
+	 * @Autowired private OrderItemRepository orderItemRepository;
+	 * 
+	 * @Autowired private ProductMapper productMapper;
+	 * 
+	 * @Autowired private UserMapper userMapper;
+	 * 
+	 * @Autowired private OrderMapper orderMapper;
+	 * 
+	 * @Autowired private OrderItemMapper orderItemMapper;
+	 * 
+	 * @Autowired private UserService userService;
+	 * 
+	 * @Autowired private OrderService orderService;
+	 * 
+	 * @Autowired private OrderItemService orderItemService;
+	 * 
+	 * @Autowired private ProductService productService;
+	 */
 
 	public static void main(String[] args) {
 		SpringApplication.run(Runner.class, args);

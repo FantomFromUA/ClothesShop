@@ -43,122 +43,110 @@ import ua.tony.service.OrderService;
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = { Runner.class })
 public class OrderControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @InjectMocks
-    OrderRestController orderController;
+	@InjectMocks
+	OrderRestController orderController;
 
-    @MockBean
-    OrderService orderService;
-    @Autowired
-    private ObjectMapper objectMapper;
+	@MockBean
+	OrderService orderService;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-    
-    @Test
-    public void findByIdTest() throws Exception {
-	OrderDto order = new OrderDto();
-	order.setId(1);
-	order.setTotalPrice(456);
-	when(orderService.findById(1)).thenReturn(order);
-	
-	List<OrderDto> orders = new ArrayList<>();
-	orders.add(order);
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+	}
 
-	mockMvc.perform(get("/orders?order_id=1").accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isOk())
-	       .andExpect(content().json(objectMapper.writeValueAsString(orders)));
-    }
-    
-    @Test
-    public void findByUserIdTest() throws Exception {
-	OrderDto order = new OrderDto();
-	order.setId(1);
-	order.setTotalPrice(456);
-	List<OrderDto> orders = new ArrayList<>();
-	orders.add(order);
-	when(orderService.getOrdersWhichRelatedToUser(1)).thenReturn(orders);
+	@Test
+	public void findByIdTest() throws Exception {
+		OrderDto order = new OrderDto();
+		order.setId(1);
+		order.setTotalPrice(456);
+		when(orderService.findById(1)).thenReturn(order);
 
-	
-	mockMvc.perform(get("/orders?user_id=1").accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk())
-	.andExpect(content().json(objectMapper.writeValueAsString(orders)));
-    }
- 
+		List<OrderDto> orders = new ArrayList<>();
+		orders.add(order);
 
-    @Test
-    public void findAllTest() throws Exception {
-        OrderDto o1=new OrderDto();
-        OrderDto o2=new OrderDto();
-        OrderDto o3=new OrderDto();
-        o1.setId(1);
-        o2.setId(2);
-        o3.setId(3);
-        o1.setTotalPrice(123);
-        o2.setTotalPrice(345);
-        o3.setTotalPrice(555);
-	List<OrderDto> orders = new ArrayList<>();
-	orders.add(o1);
-	orders.add(o2);
-	orders.add(o3);
+		mockMvc.perform(get("/orders?order_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(orders)));
+	}
 
-	when(orderService.findAll()).thenReturn(orders);
+	@Test
+	public void findByUserIdTest() throws Exception {
+		OrderDto order = new OrderDto();
+		order.setId(1);
+		order.setTotalPrice(456);
+		List<OrderDto> orders = new ArrayList<>();
+		orders.add(order);
+		when(orderService.getOrdersWhichRelatedToUser(1)).thenReturn(orders);
 
-	mockMvc.perform(get("/orders")
-		.accept(MediaType.APPLICATION_JSON))
-	        .andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(orders)));
-    }
-    
-    @Test
-    public void addOrderTest() throws Exception {
-	OrderDto order=new OrderDto();
-	UserDto user=new UserDto();
-	order.setId(1);
-	user.setName("tom");
-	user.setSurname("helloman");
-	user.setLogin("werqewr@dsad");
-	order.setUserDto(user);
-	when(orderService.save(any(OrderDto.class))).thenReturn(order);
+		mockMvc.perform(get("/orders?user_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(orders)));
+	}
 
-	mockMvc.perform(post("/orders")
-		.content(objectMapper.writeValueAsString(order))
-		.contentType("application/json")).andExpect(status().isCreated());
-    }
-    
-    @Test
-    public void deleteOrder() throws Exception{
-	
-      Mockito.doNothing().when(orderService).deleteById(1);
-      mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/orders?order_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNoContent());
-    }
-    
-    @Test
-    public void shouldReturn404ErrorWhenUserNotFound() throws Exception{
+	@Test
+	public void findAllTest() throws Exception {
+		OrderDto o1 = new OrderDto();
+		OrderDto o2 = new OrderDto();
+		OrderDto o3 = new OrderDto();
+		o1.setId(1);
+		o2.setId(2);
+		o3.setId(3);
+		o1.setTotalPrice(123);
+		o2.setTotalPrice(345);
+		o3.setTotalPrice(555);
+		List<OrderDto> orders = new ArrayList<>();
+		orders.add(o1);
+		orders.add(o2);
+		orders.add(o3);
 
- 	when(orderService.findById(1)).thenThrow( new OrderNotFoundException("order is not found by this id:1"));
+		when(orderService.findAll()).thenReturn(orders);
 
- 	mockMvc.perform(get("/orders?order_id=1").accept(MediaType.APPLICATION_JSON))
- 	       .andExpect(status().isNotFound());
-    }
-    
-   @Test
-    public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception{
-	
-       
-	Mockito.doThrow(new OrderNotDeletedException("order is not deleted by this id:1")).when(orderService).deleteById(1);
-	 mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/orders?order_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNotFound());
-    }
+		mockMvc.perform(get("/orders").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(orders)));
+	}
+
+	@Test
+	public void addOrderTest() throws Exception {
+		OrderDto order = new OrderDto();
+		UserDto user = new UserDto();
+		order.setId(1);
+		user.setName("tom");
+		user.setSurname("helloman");
+		user.setLogin("werqewr@dsad");
+		order.setUserDto(user);
+		when(orderService.save(any(OrderDto.class))).thenReturn(order);
+
+		mockMvc.perform(post("/orders").content(objectMapper.writeValueAsString(order)).contentType("application/json"))
+				.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void deleteOrder() throws Exception {
+
+		Mockito.doNothing().when(orderService).deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/orders?order_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenUserNotFound() throws Exception {
+
+		when(orderService.findById(1)).thenThrow(new OrderNotFoundException("order is not found by this id:1"));
+
+		mockMvc.perform(get("/orders?order_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception {
+
+		Mockito.doThrow(new OrderNotDeletedException("order is not deleted by this id:1")).when(orderService)
+				.deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/orders?order_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 }

@@ -32,91 +32,92 @@ import ua.tony.service.UserService;
 @AutoConfigureMockMvc
 public class IntegratedProductControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Autowired
-    ProductService productService;
-    @Autowired
-    UserService userService;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private DataBaseEntitiesGenerator generator;
+	@Autowired
+	ProductService productService;
+	@Autowired
+	UserService userService;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private DataBaseEntitiesGenerator generator;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-	generator.generateEntities();
-    }
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+		generator.generateEntities();
+	}
 
-    @AfterEach
-    public void cleanDb() {
-	generator.cleanDataBase();
-    }
+	@AfterEach
+	public void cleanDb() {
+		generator.cleanDataBase();
+	}
 
-    @Test
-    public void findByIdTest() throws Exception {
+	@Test
+	public void findByIdTest() throws Exception {
 
-	List<ProductDto> products = productService.findByName("asic");
-	
-         ProductDto product=products.get(0);
-	mockMvc.perform(get("/products?product_id=" +product.getId()).accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
+		List<ProductDto> products = productService.findByName("asic");
 
-    @Test
-    public void findProductByName() throws Exception {
+		ProductDto product = products.get(0);
+		mockMvc.perform(get("/products?product_id=" + product.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-	List<ProductDto> products = productService.findByName("asic");
-	mockMvc.perform(get("/products?product_name=asic").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
-    
-    @Test
-    public void findProductByType() throws Exception {
-	
-	List<ProductDto> products = productService.findByName("asic");
-	mockMvc.perform(get("/products?product_type=jeans").accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
-    
-    @Test
-    public void getProductsThatBoughtUserTest() throws Exception{
-	UserDto user=userService.findByLogin("hello@adad");
-	mockMvc.perform(get("/users/products?user_id="+user.getId()).accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isNotFound());
-     }
+	@Test
+	public void findProductByName() throws Exception {
 
-    @Test
-    public void findAllTest() throws Exception {
-	List<ProductDto> products = productService.findByName("asic");
-	mockMvc.perform(get("/products").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(products)));
-    }
+		List<ProductDto> products = productService.findByName("asic");
+		mockMvc.perform(get("/products?product_name=asic").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-    @Test
-    public void addProductTest() throws Exception {
+	@Test
+	public void findProductByType() throws Exception {
 
-	List<ProductDto> products = productService.findByName("asic");
+		List<ProductDto> products = productService.findByName("asic");
+		mockMvc.perform(get("/products?product_type=jeans").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-	mockMvc.perform(post("/products").content(objectMapper.writeValueAsString(products.get(0))).contentType("application/json"))
-		.andExpect(status().isCreated());
-    }
+	@Test
+	public void getProductsThatBoughtUserTest() throws Exception {
+		UserDto user = userService.findByLogin("hello@adad");
+		mockMvc.perform(get("/users/products?user_id=" + user.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 
-    @Test
-    public void shouldReturn404ErrorWhenProductNotFound() throws Exception {
+	@Test
+	public void findAllTest() throws Exception {
+		List<ProductDto> products = productService.findByName("asic");
+		mockMvc.perform(get("/products").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(products)));
+	}
 
-	mockMvc.perform(get("/prodcuts?product_id=666").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-    }
+	@Test
+	public void addProductTest() throws Exception {
 
-    @Test
-    public void shouldReturn404ErrorWhenProductNotDeleted() throws Exception {
+		List<ProductDto> products = productService.findByName("asic");
 
-	mockMvc.perform(MockMvcRequestBuilders.delete("/products?product_id=777").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNotFound());
-    }
+		mockMvc.perform(post("/products").content(objectMapper.writeValueAsString(products.get(0)))
+				.contentType("application/json")).andExpect(status().isCreated());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenProductNotFound() throws Exception {
+
+		mockMvc.perform(get("/prodcuts?product_id=666").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenProductNotDeleted() throws Exception {
+
+		mockMvc.perform(MockMvcRequestBuilders.delete("/products?product_id=777").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 }

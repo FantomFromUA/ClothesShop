@@ -42,110 +42,102 @@ import ua.tony.service.UserService;
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK, classes = { Runner.class })
 class UserControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @InjectMocks
-    UserRestController userController;
+	@InjectMocks
+	UserRestController userController;
 
-    @MockBean
-    UserService userService;
-    @Autowired
-    private ObjectMapper objectMapper;
+	@MockBean
+	UserService userService;
+	@Autowired
+	private ObjectMapper objectMapper;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-    }
-    @Test
-    public void findByIdTest() throws Exception {
-	UserDto user = new UserDto();
-	user.setName("tomcat");
-	user.setId(1);
-	when(userService.findById(1)).thenReturn(user);
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+	}
 
-	mockMvc.perform(get("/users?user_id=1").accept(MediaType.APPLICATION_JSON))
-	       .andExpect(status().isOk())
-	       .andExpect(content().json(objectMapper.writeValueAsString(user)));
-    }
-    @Test
-    public void findByLoginTest() throws Exception {
-	UserDto user = new UserDto();
-	user.setName("tomcat");
-	user.setId(1);
-	user.setLogin("teammate");
-	when(userService.findByLogin("teammate")).thenReturn(user);
-	
-	mockMvc.perform(get("/users?user_login=teammate").accept(MediaType.APPLICATION_JSON))
-	.andExpect(status().isOk())
-	.andExpect(content().json(objectMapper.writeValueAsString(user)));
-    }
+	@Test
+	public void findByIdTest() throws Exception {
+		UserDto user = new UserDto();
+		user.setName("tomcat");
+		user.setId(1);
+		when(userService.findById(1)).thenReturn(user);
 
-    @Test
-    public void findAllTest() throws Exception {
-        UserDto u1=new UserDto();
-        UserDto u2=new UserDto();
-        UserDto u3=new UserDto();
-        u1.setName("tom");
-        u2.setName("bob");
-        u3.setName("monster");
-	List<UserDto> users = new ArrayList<>();
-	users.add(u1);
-	users.add(u2);
-	users.add(u3);
+		mockMvc.perform(get("/users?user_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(user)));
+	}
 
-	when(userService.findAll()).thenReturn(users);
+	@Test
+	public void findByLoginTest() throws Exception {
+		UserDto user = new UserDto();
+		user.setName("tomcat");
+		user.setId(1);
+		user.setLogin("teammate");
+		when(userService.findByLogin("teammate")).thenReturn(user);
 
-	mockMvc.perform(get("/users")
-		.accept(MediaType.APPLICATION_JSON))
-	        .andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(users)));
-    }
-    
-    @Test
-    public void addUserTest() throws Exception {
-	UserDto user=new UserDto();
-	user.setId(1);
-	user.setName("tom");
-	user.setSurname("helloman");
-	user.setLogin("werqewr@dsad");
-	when(userService.save(any(UserDto.class))).thenReturn(user);
+		mockMvc.perform(get("/users?user_login=teammate").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(user)));
+	}
 
-	mockMvc.perform(post("/users")
-		.content(objectMapper.writeValueAsString(user))
-		.contentType("application/json")).andExpect(status().isCreated());
-    }
-    
-    @Test
-    public void deleteUser() throws Exception{
-	
-      Mockito.doNothing().when(userService).deleteById(1);
-      mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/users?user_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNoContent());
-    }
-    
-    @Test
-    public void shouldReturn404ErrorWhenUserNotFound() throws Exception{
+	@Test
+	public void findAllTest() throws Exception {
+		UserDto u1 = new UserDto();
+		UserDto u2 = new UserDto();
+		UserDto u3 = new UserDto();
+		u1.setName("tom");
+		u2.setName("bob");
+		u3.setName("monster");
+		List<UserDto> users = new ArrayList<>();
+		users.add(u1);
+		users.add(u2);
+		users.add(u3);
 
- 	when(userService.findById(1)).thenThrow( new UserNotFoundException("user is not found by this id:1"));
+		when(userService.findAll()).thenReturn(users);
 
- 	mockMvc.perform(get("/users?user_id=1").accept(MediaType.APPLICATION_JSON))
- 	       .andExpect(status().isNotFound());
-    }
-    
-   @Test
-    public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception{
-	
-       
-	Mockito.doThrow(new UserNotDeletedException("user is not deleted by this id:1")).when(userService).deleteById(1);
-	 mockMvc.perform(MockMvcRequestBuilders
-	            .delete("/users?user_id=1")
-	            .accept(MediaType.APPLICATION_JSON))
-	            .andExpect(status().isNotFound());
-    }
+		mockMvc.perform(get("/users").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(users)));
+	}
+
+	@Test
+	public void addUserTest() throws Exception {
+		UserDto user = new UserDto();
+		user.setId(1);
+		user.setName("tom");
+		user.setSurname("helloman");
+		user.setLogin("werqewr@dsad");
+		when(userService.save(any(UserDto.class))).thenReturn(user);
+
+		mockMvc.perform(post("/users").content(objectMapper.writeValueAsString(user)).contentType("application/json"))
+				.andExpect(status().isCreated());
+	}
+
+	@Test
+	public void deleteUser() throws Exception {
+
+		Mockito.doNothing().when(userService).deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/users?user_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenUserNotFound() throws Exception {
+
+		when(userService.findById(1)).thenThrow(new UserNotFoundException("user is not found by this id:1"));
+
+		mockMvc.perform(get("/users?user_id=1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception {
+
+		Mockito.doThrow(new UserNotDeletedException("user is not deleted by this id:1")).when(userService)
+				.deleteById(1);
+		mockMvc.perform(MockMvcRequestBuilders.delete("/users?user_id=1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 
 }

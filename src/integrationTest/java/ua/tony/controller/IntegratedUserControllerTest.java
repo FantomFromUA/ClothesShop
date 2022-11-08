@@ -36,83 +36,83 @@ import ua.tony.service.UserService;
 @AutoConfigureMockMvc
 public class IntegratedUserControllerTest {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+	@Autowired
+	private WebApplicationContext webApplicationContext;
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Autowired
-    UserService userService;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private DataBaseEntitiesGenerator generator;
+	@Autowired
+	UserService userService;
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private DataBaseEntitiesGenerator generator;
 
-    @BeforeEach
-    public void setUp() {
-	this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
-	generator.generateEntities();
-    }
+	@BeforeEach
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.webApplicationContext).build();
+		generator.generateEntities();
+	}
 
-    @AfterEach
-    public void cleanDb() {
-	generator.cleanDataBase();
-    }
+	@AfterEach
+	public void cleanDb() {
+		generator.cleanDataBase();
+	}
 
-    @Test
-    public void findByIdTest() throws Exception {
+	@Test
+	public void findByIdTest() throws Exception {
 
-	UserDto user = userService.findByLogin("hello@adad");
+		UserDto user = userService.findByLogin("hello@adad");
 
-	mockMvc.perform(get("/users?user_id=" + user.getId()).accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(user)));
-    }
+		mockMvc.perform(get("/users?user_id=" + user.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(user)));
+	}
 
-    @Test
-    public void findUserByLoginAndPassword() throws Exception {
+	@Test
+	public void findUserByLoginAndPassword() throws Exception {
 
-	UserDto user = userService.findByLogin("hello@adad");
-	mockMvc.perform(get("/users?user_login=hello@adad&password=12345sms").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(user)));
-    }
+		UserDto user = userService.findByLogin("hello@adad");
+		mockMvc.perform(get("/users?user_login=hello@adad&password=12345sms").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(content().json(objectMapper.writeValueAsString(user)));
+	}
 
-    @Test
-    public void findAllTest() throws Exception {
-	UserDto user = userService.findByLogin("hello@adad");
-	List<UserDto> users = new ArrayList<>();
-	users.add(user);
-	mockMvc.perform(get("/users").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-		.andExpect(content().json(objectMapper.writeValueAsString(users)));
-    }
+	@Test
+	public void findAllTest() throws Exception {
+		UserDto user = userService.findByLogin("hello@adad");
+		List<UserDto> users = new ArrayList<>();
+		users.add(user);
+		mockMvc.perform(get("/users").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(content().json(objectMapper.writeValueAsString(users)));
+	}
 
-    @Test
-    public void addUserTest() throws Exception {
+	@Test
+	public void addUserTest() throws Exception {
 
-	UserDto user = userService.findByLogin("hello@adad");
+		UserDto user = userService.findByLogin("hello@adad");
 
-	mockMvc.perform(post("/users").content(objectMapper.writeValueAsString(user)).contentType("application/json"))
-		.andExpect(status().isCreated());
-    }
+		mockMvc.perform(post("/users").content(objectMapper.writeValueAsString(user)).contentType("application/json"))
+				.andExpect(status().isCreated());
+	}
 
-    @Test
-    public void deleteUser() throws Exception {
-	UserDto user = userService.findByLogin("hello@adad");
-	mockMvc.perform(
-		MockMvcRequestBuilders.delete("/users?user_id=" + user.getId()).accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNoContent());
-    }
+	@Test
+	public void deleteUser() throws Exception {
+		UserDto user = userService.findByLogin("hello@adad");
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete("/users?user_id=" + user.getId()).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
 
-    @Test
-    public void shouldReturn404ErrorWhenUserNotFound() throws Exception {
+	@Test
+	public void shouldReturn404ErrorWhenUserNotFound() throws Exception {
 
-	mockMvc.perform(get("/users?user_id=666").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
-    }
+		mockMvc.perform(get("/users?user_id=666").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+	}
 
-    @Test
-    public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception {
+	@Test
+	public void shouldReturn404ErrorWhenUserNotDeleted() throws Exception {
 
-	mockMvc.perform(MockMvcRequestBuilders.delete("/users?user_id=777").accept(MediaType.APPLICATION_JSON))
-		.andExpect(status().isNotFound());
-    }
+		mockMvc.perform(MockMvcRequestBuilders.delete("/users?user_id=777").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
 }

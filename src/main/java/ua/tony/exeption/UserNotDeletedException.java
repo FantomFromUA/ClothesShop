@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class UserNotDeletedException  extends RuntimeException {
+public class UserNotDeletedException extends RuntimeException {
 
-    public UserNotDeletedException(String massege) {
-	super(massege);
-    }
+	public UserNotDeletedException(String massege) {
+		super(massege);
+	}
 
 }
