@@ -1,15 +1,20 @@
 package ua.tony.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import ua.tony.entity.User;
+import ua.tony.repository.UserRepository;
 
 @Controller
 public class PageRedirectController {
 
 	/**
-	 * Метод який перенаправляє користувача на сторінку Реєстрації
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 * 
-	 * @return signup.html (сторінка реєстрації)
+	 * @return signup.html (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 	 */
 	@GetMapping(value = "/signup")
 	public String showSignUp() {
@@ -17,9 +22,9 @@ public class PageRedirectController {
 	}
 
 	/**
-	 * Метод який перенаправляє користувача на сторінку Авторизації
+	 * пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	 * 
-	 * @return login.html (сторінка авторизації)
+	 * @return login.html (пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 	 */
 	@GetMapping(value = "/login")
 	public String showLoginUp() {

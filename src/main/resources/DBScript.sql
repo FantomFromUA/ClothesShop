@@ -16,6 +16,8 @@ CREATE TABLE `users` (
   `password` varchar(70) NOT NULL,
   `coins` decimal(11, 2) DEFAULT 0,
   `admin_access` boolean DEFAULT FALSE,
+  `token` varchar(300) NOT NULL UNIQUE,
+  `is_evaliable` boolean DEFAULT FALSE
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 

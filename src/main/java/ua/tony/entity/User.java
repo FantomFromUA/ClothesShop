@@ -38,6 +38,10 @@ public class User {
 
 	@Column(name = "admin_access")
 	private boolean adminAccess;
+	
+	private String token;
+	
+	private boolean isAvailable;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Order> orders;
@@ -45,13 +49,16 @@ public class User {
 	public User() {
 	}
 
-	public User(String name, String surname, String login, String password, double coins, boolean adminAccess) {
+	public User(String name, String surname, String login, String password, double coins, boolean adminAccess,
+			String token, boolean isAvailable) {
 		this.name = name;
 		this.surname = surname;
 		this.login = login;
 		this.password = password;
 		this.coins = coins;
 		this.adminAccess = adminAccess;
+		this.token = token;
+		this.isAvailable = isAvailable;
 	}
 
 	public int getId() {
@@ -116,11 +123,29 @@ public class User {
 
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
+	}	
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
-				+ password + ", coins=" + coins + ", adminAccess=" + adminAccess + "]";
+				+ password + ", coins=" + coins + ", adminAccess=" + adminAccess + ", token=" + token + ", isAvailable="
+				+ isAvailable + ", orders=" + orders + "]";
 	}
+	
 }

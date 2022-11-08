@@ -20,6 +20,8 @@ public class UserDto {
 
 	@Size(min = 4, message = "password should have at least 4 characters")
 	private String password;
+	
+	private String token;
 
 	private double coins;
 
@@ -28,13 +30,14 @@ public class UserDto {
 	public UserDto() {
 	}
 
-	public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess) {
+	public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess, String token) {
 		this.name = name;
 		this.surname = surname;
 		this.login = login;
 		this.password = password;
 		this.coins = coins;
 		this.adminAccess = adminAccess;
+		this.token = token;
 	}
 
 	public int getId() {
@@ -91,6 +94,14 @@ public class UserDto {
 
 	public void setAdminAccess(boolean adminAccess) {
 		this.adminAccess = adminAccess;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override
