@@ -43,7 +43,11 @@ public class OrderService {
 
 	Order order = orderRepo.findById(orderDto.getId()).get();
 	if (orderDto.getCompleted()) {
-
+             LocalDate orderDate= LocalDate.now();
+             LocalDate deliveryDate= orderDate.plusDays(3);
+             order.setOrderDate(orderDate);
+             order.setDeliveryDate(deliveryDate);
+             order.setCompleted(true);
 	    for (int i = 0; i < order.getOrderItems().size(); i++) {
 
 		order.getOrderItems().get(i).getProduct().setInStock(false);
