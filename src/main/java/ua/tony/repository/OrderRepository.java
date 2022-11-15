@@ -71,6 +71,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 	 * @return список заказів
 	 */
 	public @Query(value = "SELECT orders.id,orders.total_price,orders.order_date,orders.delivery_date,orders.completed,orders.user_id FROM orders "
-			+ "WHERE orders.user_id=:userId ", nativeQuery = true) List<Order> getOrdersThatRelatedToUser(
+			+ "WHERE orders.user_id=:userId AND orders.completed=true ", nativeQuery = true) List<Order> getOrdersThatRelatedToUser(
 					@Param("userId") Integer userId);
 }
