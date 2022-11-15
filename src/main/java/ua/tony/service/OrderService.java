@@ -22,36 +22,15 @@ public class OrderService {
 	@Autowired
 	private OrderRepository orderRepo;
 
-    /**
-     * Метод, який зберігає заказ в БД
-     * 
-     * @param orderDto - заказ
-     * @return заказ
-     */
-    public OrderDto save(OrderDto orderDto) {
-	Order order = orderMapper.convertToEntity(orderDto);
-	return orderMapper.convertToDto(orderRepo.save(order));
-    }
-
-    /**
-     * Метод, який оновлює інформацію про заказ в БД
-     * 
-     * @param orderDto - заказ
-     * @return заказ
-     */
-    public OrderDto update(OrderDto orderDto) {
-
-	Order order = orderRepo.findById(orderDto.getId()).get();
-	if (orderDto.getCompleted()) {
-             LocalDate orderDate= LocalDate.now();
-             LocalDate deliveryDate= orderDate.plusDays(3);
-             order.setOrderDate(orderDate);
-             order.setDeliveryDate(deliveryDate);
-             order.setCompleted(true);
-	    for (int i = 0; i < order.getOrderItems().size(); i++) {
-
-		order.getOrderItems().get(i).getProduct().setInStock(false);
-	    }
+	/**
+	 * Метод, який зберігає заказ в БД
+	 * 
+	 * @param orderDto - заказ
+	 * @return заказ
+	 */
+	public OrderDto save(OrderDto orderDto) {
+		Order order = orderMapper.convertToEntity(orderDto);
+		return orderMapper.convertToDto(orderRepo.save(order));
 	}
 
 	/**
@@ -64,12 +43,17 @@ public class OrderService {
 
 		Order order = orderRepo.findById(orderDto.getId()).get();
 		if (orderDto.getCompleted()) {
-
+			LocalDate orderDate = LocalDate.now();
+			LocalDate deliveryDate = orderDate.plusDays(3);
+			order.setOrderDate(orderDate);
+			order.setDeliveryDate(deliveryDate);
+			order.setCompleted(true);
 			for (int i = 0; i < order.getOrderItems().size(); i++) {
 
 				order.getOrderItems().get(i).getProduct().setInStock(false);
 			}
 		}
+
 		return orderMapper.convertToDto(orderRepo.save(order));
 	}
 
