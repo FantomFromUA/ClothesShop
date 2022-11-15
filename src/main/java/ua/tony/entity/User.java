@@ -39,8 +39,10 @@ public class User {
 	@Column(name = "admin_access")
 	private boolean adminAccess;
 	
+	@Column(name="token")
 	private String token;
 	
+	@Column(name="is_avaliable")
 	private boolean isAvailable;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
@@ -133,11 +135,11 @@ public class User {
 		this.token = token;
 	}
 
-	public boolean isAvailable() {
+	public boolean getIsAvailable() {
 		return isAvailable;
 	}
 
-	public void setAvailable(boolean isAvailable) {
+	public void setIsAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
 

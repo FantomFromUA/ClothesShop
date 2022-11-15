@@ -6,118 +6,119 @@ import javax.validation.constraints.Size;
 
 public class UserDto {
 
-	private int id;
+    private int id;
 
-	@NotEmpty(message = "should not be empty")
-	@Size(min = 2, message = "user name should have at least 2 characters")
-	private String name;
+    @NotEmpty(message = "should not be empty")
+    @Size(min = 2, message = "user name should have at least 2 characters")
+    private String name;
 
-	private String surname;
+    private String surname;
 
-	@NotEmpty(message = "should not be empty")
-	@Email(message = "email should be valid")
-	private String login;
+    @NotEmpty(message = "should not be empty")
+    @Email(message = "email should be valid")
+    private String login;
 
-	@Size(min = 4, message = "password should have at least 4 characters")
-	private String password;
-	
-	private String token;
+    @Size(min = 4, message = "password should have at least 4 characters")
+    private String password;
 
-	private double coins;
-	
-	private boolean isAvaliable;
+    private String token;
 
-	private boolean adminAccess;
+    private double coins;
 
-	public UserDto() {
-	}
+    private boolean isAvaliable;
 
-	public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess, String token, boolean isAvaliable) {
-		this.name = name;
-		this.surname = surname;
-		this.login = login;
-		this.password = password;
-		this.coins = coins;
-		this.adminAccess = adminAccess;
-		this.token = token;
-		this.setAvaliable(isAvaliable);
-	}
+    private boolean adminAccess;
 
-	public int getId() {
-		return id;
-	}
+    public UserDto() {
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess,
+	    String token, boolean isAvaliable) {
+	this.name = name;
+	this.surname = surname;
+	this.login = login;
+	this.password = password;
+	this.coins = coins;
+	this.adminAccess = adminAccess;
+	this.token = token;
+	this.isAvaliable = isAvaliable;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public int getId() {
+	return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(int id) {
+	this.id = id;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public String getName() {
+	return name;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	public String getLogin() {
-		return login;
-	}
+    public String getSurname() {
+	return surname;
+    }
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
+    public void setSurname(String surname) {
+	this.surname = surname;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getLogin() {
+	return login;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setLogin(String login) {
+	this.login = login;
+    }
 
-	public double getCoins() {
-		return coins;
-	}
+    public String getPassword() {
+	return password;
+    }
 
-	public void setCoins(double coins) {
-		this.coins = coins;
-	}
+    public void setPassword(String password) {
+	this.password = password;
+    }
 
-	public boolean getAdminAccess() {
-		return adminAccess;
-	}
+    public double getCoins() {
+	return coins;
+    }
 
-	public void setAdminAccess(boolean adminAccess) {
-		this.adminAccess = adminAccess;
-	}
+    public void setCoins(double coins) {
+	this.coins = coins;
+    }
 
-	public String getToken() {
-		return token;
-	}
+    public boolean getAdminAccess() {
+	return adminAccess;
+    }
 
-	public void setToken(String token) {
-		this.token = token;
-	}
+    public void setAdminAccess(boolean adminAccess) {
+	this.adminAccess = adminAccess;
+    }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
-				+ password + ", coins=" + coins + ", adminAccess=" + adminAccess + "]";
-	}
+    public String getToken() {
+	return token;
+    }
 
-	public boolean getIsAvaliable() {
-		return isAvaliable;
-	}
+    public void setToken(String token) {
+	this.token = token;
+    }
 
-	public void setAvaliable(boolean isAvaliable) {
-		this.isAvaliable = isAvaliable;
-	}
+    @Override
+    public String toString() {
+	return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
+		+ password + ", coins=" + coins + ", adminAccess=" + adminAccess + "]";
+    }
+
+    public boolean getIsAvaliable() {
+	return isAvaliable;
+    }
+
+    public void setIsAvaliable(boolean isAvaliable) {
+	this.isAvaliable = isAvaliable;
+    }
 }

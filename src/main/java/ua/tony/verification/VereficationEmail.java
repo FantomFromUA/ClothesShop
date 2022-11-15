@@ -12,7 +12,7 @@ public class VereficationEmail {
 	private EmailSender emailSender;
 
 	public void sendMail(User user) {
-		String link = "http://localhost:8080/registration/confirm?token=" + user.getToken();
+		String link = "http://localhost:8082/registration/confirm?token=" + user.getToken();
 		
 		emailSender.send(
                 user.getLogin(),

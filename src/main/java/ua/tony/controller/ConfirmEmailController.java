@@ -19,7 +19,7 @@ public class ConfirmEmailController {
     public String confirm(@RequestParam("token") String token) {
 		User user = userRepo.findByToken(token);
 		
-		user.setAvailable(true);
+		user.setIsAvailable(true);
 		
 		userRepo.save(user);
 		
