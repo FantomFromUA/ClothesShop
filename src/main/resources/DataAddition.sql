@@ -1,0 +1,15 @@
+INSERT INTO products (name, type, code, size, price, description)  
+VALUES  ("White Hoodie", "hoodie", 111, "XL", 499.99, "white hoodie"),
+		("White Hoodie", "hoodie", 112, "XXL", 599.99, "white hoodie"),
+        ("Black Hoodie", "hoodie", 121, "XL", 499.99, "black hoodie"),
+		("Black Hoodie", "hoodie", 122, "XXL", 599.99, "black hoodie"),
+        ("Yellow Hoodie", "hoodie", 131, "XL", 499.99, "yellow hoodie"),
+        ("Yellow Hoodie", "hoodie", 132, "XXL", 599.99, "yellow hoodie"),
+        ("Black Jeans", "jeans", 211, "L", 349.99, "Black Jeans"),
+        ("Black Jeans", "jeans", 212, "XL", 399.99, "Black Jeans"),
+        ("Black Jeans", "jeans", 213, "XXL", 449.99, "Black Jeans"),
+        ("Black Jeans", "jeans", 214, "XXL", 499.99, "Black Jeans"),
+        ("Bluse Jeans", "jeans", 221, "L", 349.99, "Bluse Jeans"),
+        ("Bluse Jeans", "jeans", 222, "XL", 399.99, "Bluse Jeans"),
+        ("Bluse Jeans", "jeans", 223, "XXL", 449.99, "Bluse Jeans"),
+        ("Bluse Jeans", "jeans", 224, "XXL", 499.99, "Bluse Jeans")

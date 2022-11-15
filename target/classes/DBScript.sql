@@ -1,8 +1,8 @@
-DROP SCHEMA IF EXISTS `clothes-shopTest`;
+DROP SCHEMA IF EXISTS `clothes-shop`;
 
-CREATE SCHEMA `clothes-shopTest`;
+CREATE SCHEMA `clothes-shop`;
 
-use `clothes-shopTest`;
+use `clothes-shop`;
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -20,6 +20,7 @@ CREATE TABLE `users` (
   `is_avaliable` boolean DEFAULT FALSE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `orders`;
 

@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailSender {
 	
-	@Autowired	
+	@Autowired
 	private JavaMailSender mailSender;
-	
 	
 	public void send(String to, String email) {
         try {
