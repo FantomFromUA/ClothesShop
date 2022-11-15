@@ -94,6 +94,7 @@ public class OrderRepositoryTest {
 	user.setLogin("login");
 	userRepository.save(user);
 	order.setUser(user);
+	order.setCompleted(true);
 	orderRepository.save(order);
 	List<Order>orders=orderRepository.getOrdersThatRelatedToUser(1);
 	assertThat(orders.size()).isEqualTo(1);

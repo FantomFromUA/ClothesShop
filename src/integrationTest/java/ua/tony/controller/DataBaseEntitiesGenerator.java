@@ -44,6 +44,7 @@ public class DataBaseEntitiesGenerator {
 	ProductDto product2=productService.save(product);
 	OrderDto order = new OrderDto();
 	order.setUserDto(user2);
+	order.setCompleted(true);
 	OrderDto order2=orderService.save(order);
 	OrderItemDto orderItem = new OrderItemDto();
 	orderItem.setOrderDto(order2);
