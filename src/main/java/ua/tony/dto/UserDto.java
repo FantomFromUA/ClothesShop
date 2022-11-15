@@ -24,13 +24,15 @@ public class UserDto {
 	private String token;
 
 	private double coins;
+	
+	private boolean isAvaliable;
 
 	private boolean adminAccess;
 
 	public UserDto() {
 	}
 
-	public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess, String token) {
+	public UserDto(String name, String surname, String login, String password, double coins, boolean adminAccess, String token, boolean isAvaliable) {
 		this.name = name;
 		this.surname = surname;
 		this.login = login;
@@ -38,6 +40,7 @@ public class UserDto {
 		this.coins = coins;
 		this.adminAccess = adminAccess;
 		this.token = token;
+		this.setAvaliable(isAvaliable);
 	}
 
 	public int getId() {
@@ -108,5 +111,13 @@ public class UserDto {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
 				+ password + ", coins=" + coins + ", adminAccess=" + adminAccess + "]";
+	}
+
+	public boolean getIsAvaliable() {
+		return isAvaliable;
+	}
+
+	public void setAvaliable(boolean isAvaliable) {
+		this.isAvaliable = isAvaliable;
 	}
 }

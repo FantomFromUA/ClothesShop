@@ -17,9 +17,6 @@ public class ConfirmEmailController {
 
 	@GetMapping(value = "registration/confirm")
     public String confirm(@RequestParam("token") String token) {
-		System.out.println("Я бебра");
-		
-		
 		User user = userRepo.findByToken(token);
 		
 		user.setAvailable(true);
