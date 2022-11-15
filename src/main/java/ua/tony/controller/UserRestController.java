@@ -56,7 +56,7 @@ public class UserRestController {
 			@RequestParam(value = "user_login", required = false) String user_login,
 			@RequestParam(value = "purchases", required = false) String purchases,
 			@RequestParam(value = "password", required = false) String password) {
-		UserDto  user = new UserDto();
+		UserDto  user = null;
 		// Find by ID
 		if (user_id != null && user_login == null && purchases == null && password == null) {
 			user = userService.findById(user_id);
