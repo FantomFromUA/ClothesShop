@@ -3,6 +3,7 @@ package ua.tony.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -16,6 +17,7 @@ import ua.tony.exeption.UserNotFoundException;
 import ua.tony.mapper.UserMapper;
 import ua.tony.repository.OrderRepository;
 import ua.tony.repository.UserRepository;
+import ua.tony.verification.VereficationEmail;
 
 @Service
 public class UserService {
@@ -26,7 +28,9 @@ public class UserService {
 	UserRepository userRepo;
 	@Autowired
 	OrderRepository orderRepo;
-
+	@Autowired
+	VereficationEmail vereficationEmail;
+	
 	/**
 	 * Метод, який зберігає користувача в БД
 	 * 
@@ -35,7 +39,9 @@ public class UserService {
 	 */
 	public UserDto save(UserDto userDto) {
 
+		userDto.setToken(UUID.randomUUID().toString());
 		User user = userMapper.convertToEntity(userDto);
+		vereficationEmail.sendMail(user);
 		return userMapper.convertToDto(userRepo.save(user));
 	}
 
@@ -120,7 +126,7 @@ public class UserService {
 	 * @param userId - id користувача
 	 * @return загальна ціна покупок
 	 */
-	public Double getPriceOfAllProductsWhichUserBought(Integer userId) throws UserNotFoundException {
+	public Double getPriceOfAllProductsThatUserBought(Integer userId) throws UserNotFoundException {
 
 		if (userRepo.findById(userId).isPresent()) {
 			List<Order> orders = orderRepo.getOrdersThatRelatedToUser(userId);
@@ -142,7 +148,7 @@ public class UserService {
 		List<UserDto> users = findAll();
 		Map<UserDto, Double> usersValueOfPurchases = new LinkedHashMap<>();
 		for (int i = 0; i < users.size(); i++) {
-			usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsWhichUserBought(users.get(i).getId()));
+			usersValueOfPurchases.put(users.get(i), getPriceOfAllProductsThatUserBought(users.get(i).getId()));
 		}
 		return usersValueOfPurchases;
 	}

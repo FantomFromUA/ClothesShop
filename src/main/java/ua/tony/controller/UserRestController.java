@@ -56,38 +56,42 @@ public class UserRestController {
 			@RequestParam(value = "user_login", required = false) String user_login,
 			@RequestParam(value = "purchases", required = false) String purchases,
 			@RequestParam(value = "password", required = false) String password) {
+		UserDto  user = null;
 		// Find by ID
 		if (user_id != null && user_login == null && purchases == null && password == null) {
-
-			return ResponseEntity.ok(userService.findById(user_id));
+			user = userService.findById(user_id);
 		}
 
 		// Find by login and password
 		if (user_id == null && user_login != null && password != null && purchases == null) {
-			UserDto user = userService.findByLogin(user_login);
+			user = userService.findByLogin(user_login);
 
-			if (user.getPassword().equals(password)) {
-				return ResponseEntity.ok(user);
-			} else
+			if (!user.getPassword().equals(password)) {
 				throw new UserNotFoundException("password is wrong :" + password);
+			}
 		}
-
+		
 		// Find by login
 		if (user_id == null && user_login != null && purchases == null && password == null) {
-
-			return ResponseEntity.ok(userService.findByLogin(user_login));
+			user = userService.findByLogin(user_login);
 		}
 		// Find All
 		if (user_id == null && user_login == null && purchases == null && password == null)
-
 			return ResponseEntity.ok(userService.findAll());
 
 		// Find user purchases
 		if (user_id == null && user_login == null && purchases.equals("pur") && password == null) {
-
 			return ResponseEntity.ok(userService.getUsersAndValueOfPurchases());
-		} else
+		}
+		if(user == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+		}
+		
+		if(!user.getIsAvaliable()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.ok(user);
 	}
 
 	@RequestMapping(value = "users", method = RequestMethod.DELETE, produces = { MediaType.APPLICATION_JSON_VALUE })

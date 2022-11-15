@@ -18,6 +18,8 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	 * @return користувач
 	 */
 	User findByLogin(String login);
+	
+	User findByToken(String token);
 
 	/**
 	 * Метод, який знаходить та повертає користувача за заданим id
